@@ -19,7 +19,8 @@ const MODE = process.env.NODE_ENV;
 
 //MIDDLEWARE
 app.use(
-  cors()
+  cors(),
+  express.json()
 );
 
 //LOAD ROUTES
