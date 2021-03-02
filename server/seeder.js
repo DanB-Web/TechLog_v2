@@ -13,12 +13,12 @@ import companies from './data/companyData.js';
 import reports from './data/reportData.js';
 
 //IMPORT MODELS
-import User from './models/userModel.js';
-import Company from './models/companyModel.js';
-import Report from './models/reportModel.js';     
+import { User } from './models/userModel.js';
+import { Company } from './models/companyModel.js';
+import { Report } from './models/reportModel.js';     
 
 //IMPORT DB CONNECTION
-import connectDB from './config/database.js';
+import { connectDB } from './config/database.js';
 
 dotenv.config();
 
@@ -27,6 +27,7 @@ connectDB();
 
 const importData = async () => {
   try { 
+    
     //Clear existing db
     await User.deleteMany();
     await Company.deleteMany();
@@ -35,7 +36,7 @@ const importData = async () => {
     //Add all seed companies to db
     const createdCompanies = await Company.insertMany(companies);
     
-    //Assign company id's to users
+    //Assign company id's to users.company property
     users[0].company = createdCompanies[0]._id;
     users[1].company = createdCompanies[1]._id;
     users[2].company = createdCompanies[1]._id;
@@ -45,6 +46,16 @@ const importData = async () => {
     //Add all seed users to db
     const createdUsers = await User.insertMany(users);
 
+    //Populate Company 'user' []'s
+    createdCompanies[0].users.push(createdUsers[0]._id);
+    createdCompanies[0].save();
+    createdCompanies[1].users.push(createdUsers[1]._id);
+    createdCompanies[1].users.push(createdUsers[2]._id);
+    createdCompanies[1].save();
+    createdCompanies[2].users.push(createdUsers[3]._id);
+    createdCompanies[2].users.push(createdUsers[4]._id);
+    createdCompanies[2].save();
+ 
     //Assign user + company id's to reports
 
     //DAN LEVEL USER

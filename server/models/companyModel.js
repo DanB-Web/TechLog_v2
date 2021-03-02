@@ -22,6 +22,11 @@ const companySchema = mongoose.Schema({
     type: String,
     required: true
   },
+  users: [{
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  }]
 }, {
   timestamps: true
   }
@@ -29,4 +34,4 @@ const companySchema = mongoose.Schema({
 
 const Company = mongoose.model('Company', companySchema);
 
-export default Company;
+export { Company };
