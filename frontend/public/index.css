@@ -1,0 +1,32 @@
+html {
+  --color-primary: #e74c3c;
+  --color-secondary: #fff;
+  --color-background: #ffffff;
+  --color-accent: #adb5bd;
+  --color-success: #00bc8c;
+  --color-info: #3498db;
+  --color-warning: #fc9c12;
+  --color-danger: #e74c3c;
+  --color-link: #3498db;
+}
+
+html[data-theme="dark"] {
+  --color-primary: #444444;
+  --color-secondary: #375a7f;
+  --color-background: #222222;
+  --color-accent: #adb5bd;
+  --color-success: #00bc8c;
+  --color-info: #3498db;
+  --color-warning: #fc9c12;
+  --color-danger: #e74c3c;
+  --color-tag: #007053;
+}
+
+/*Smooth transition between light/dark mode*/
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 1000ms !important;
+  transition-delay: 0 !important;
+}
