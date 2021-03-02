@@ -32,7 +32,7 @@ type Company {
   secondaryColor: String!
   logoUrl: String!
   users: [User!]
-  reports: [Report!]
+  reports: [Report]
 }
 
 type User {
