@@ -5,6 +5,11 @@ import colors from 'colors';
 
 dotenv.config();
 
+//GRAPHQL
+import { ApolloServer, gql } from 'apollo-server-express';
+import fs from 'fs';
+import { resolvers } from './graphql/resolvers.js';
+
 //ROUTES + CUSTOM MIDDLEWARE
 import { router } from './routes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -15,13 +20,22 @@ import { connectDB } from './config/database.js';
 //NEW APP INSTANCE AND .ENV VARIABLES
 const app = express();
 const PORT = process.env.PORT || 5000 ;
-const MODE = process.env.NODE_ENV;
+const MODE = process.env.NODE_ENV || 'env not found';
 
-//MIDDLEWARE
+//STANDARD MIDDLEWARE
 app.use(
   cors(),
   express.json()
 );
+
+//APOLLO SERVER CONFIG
+const typeDefs = gql(fs.readFileSync('./graphql/schema.graphql', {encoding: 'utf8'}));
+const context = ({ req }) => ({
+  user: req.user
+});
+
+const apolloServer = new ApolloServer({typeDefs, resolvers, context});
+apolloServer.applyMiddleware({app, path:'/graphql'});
 
 //LOAD ROUTES
 app.use(router);

@@ -4,21 +4,24 @@ const companies = [
     address: "Surrey Lodge",
     primaryColor: "grey",
     secondaryColor: "white",
-    logoUrl: "na"
+    logoUrl: "na",
+    users: []
   },
   {
     name: "Reach Subsea AS",
     address: "Haugesund, Norway",
     primaryColor: "red",
     secondaryColor: "white",
-    logoUrl: "na"
+    logoUrl: "na",
+    users: []
   },
   {
     name: "DeepOcean AS",
     address: "Haugesund, Norway",
     primaryColor: "green",
     secondaryColor: "blue",
-    logoUrl: "na"
+    logoUrl: "na",
+    users: []
   }
 ]
 
