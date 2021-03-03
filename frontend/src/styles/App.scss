@@ -5,14 +5,8 @@
 @import "./_forms.scss";
 @import "./_buttons.scss";
 
-//IMPORT SCREEN STYLES
-
-//IMPORT COMPONENT STYLES
-
 //CSS RESET
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -29,10 +23,31 @@ ol {
   list-style: none;
 }
 
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 html:focus-within {
   scroll-behavior: smooth;
 }
 
-h1 {
-  color: var(--color-primary);
+//Backdrop Styles
+.backdrop-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
 }
