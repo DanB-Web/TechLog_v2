@@ -18,3 +18,22 @@
 //     }
 //   }
 // }
+
+//companyReports
+
+//{"id":"603e290157b43632405647f4"}
+
+// query($id:ID!){
+//   companyReports(id:$id){
+    
+//     title
+    
+//     user {
+//       name
+//       reports {
+//         title
+//       }
+//     }
+
+//   }
+// }

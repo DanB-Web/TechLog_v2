@@ -1,0 +1,57 @@
+@import "./config";
+
+.drawer-container {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  background-color: var(--color-primary);
+  button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    outline: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 10%;
+    color: var(--color-secondary);
+    font-size: 2rem;
+  }
+  button:hover {
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+  }
+  .drawer-links {
+    height: 100vh;
+    @extend %flex-column-center;
+    color: var(--color-secondary);
+    font-size: 2rem;
+    a {
+      width: 80%;
+      padding: 1rem;
+    }
+    a:hover {
+      color: var(--color-primary);
+      background-color: var(--color-secondary);
+      border-radius: 5px;
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .drawer-container {
+    width: 70%;
+    .drawer-links {
+      font-size: 1.4rem;
+    }
+  }
+}

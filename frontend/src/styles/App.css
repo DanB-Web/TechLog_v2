@@ -1,8 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap");
-h3 {
-  color: yellow;
-}
-
 h2 {
   color: blue;
 }
@@ -11,9 +7,7 @@ button {
   padding: 1rem;
 }
 
-*,
-*::before,
-*::after {
+* {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0;
@@ -31,11 +25,19 @@ ol {
   list-style: none;
 }
 
-html:focus-within {
-  scroll-behavior: smooth;
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
 }
 
-h1 {
-  color: var(--color-primary);
+button:hover {
+  cursor: pointer;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
 }
 /*# sourceMappingURL=App.css.map */
