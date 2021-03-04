@@ -5,11 +5,11 @@ import '../styles/App.scss';
 
 import Drawer from './Drawer';
 
-const Backdrop = ({toggleDrawer}) => {
+const Backdrop = ({toggleDrawer, logout }) => {
 
   return createPortal(
     <div className="backdrop-container">
-      <Drawer toggleDrawer={toggleDrawer}>Drawer</Drawer>
+      <Drawer toggleDrawer={toggleDrawer} logout={logout}>Drawer</Drawer>
     </div>, document.getElementById('backdrop-hook')
   );
 }
