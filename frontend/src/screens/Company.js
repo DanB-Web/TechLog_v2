@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const Company = () => {
+import { useSelector } from 'react-redux';
+
+const Company = ({ history }) => {
+
+  const auth = useSelector((state) => state.userLogin.loggedIn);
+  !auth && history.push('/login');
+
   return (
     <div>
       Company

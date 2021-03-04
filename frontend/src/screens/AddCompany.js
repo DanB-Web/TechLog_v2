@@ -2,16 +2,16 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 
-const EditReport = ({ history }) => {
+const AddCompany = ({ history }) => {
 
   const auth = useSelector((state) => state.userLogin.loggedIn);
   !auth && history.push('/login');
 
   return (
     <div>
-      Edit Report
+      Add Company
     </div>
   )
 }
 
-export default EditReport
+export default AddCompany;
