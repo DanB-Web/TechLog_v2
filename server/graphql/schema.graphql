@@ -6,6 +6,7 @@ type Schema {
 #Queries
 type Query {
   reportDetail(id: ID!): Report
+  companyDetails(id: ID!): Company
   companyReports(id: ID!): [Report]
   myReports(id: ID!): [Report]
 }
@@ -36,6 +37,7 @@ type Company {
 }
 
 type User {
+  id: ID!
   name: String!
   email: String!
   company: Company!

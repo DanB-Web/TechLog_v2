@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../state/actions/userActions';
+import { fetchCompany } from '../state/actions/companyActions';
 
 import Alert from '../components/Alert';
 
@@ -20,10 +21,13 @@ const Login = ({history}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
-  //SUCCESSFUL LOGIN
+  //SUCCESSFUL LOGIN - GET COMPANY DETAILS
   useEffect(() => {
-    loggedIn && history.push('/search')
-  }, [loggedIn, history])
+    if (loggedIn) {
+    dispatch(fetchCompany());  
+    history.push('/search');
+    }
+  }, [loggedIn, history, dispatch])
 
   const loginUser = (e) => {
     e.preventDefault();
