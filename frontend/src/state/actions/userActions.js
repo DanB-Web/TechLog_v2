@@ -5,7 +5,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
-  USER_LOGOUT
+  USER_LOGOUT,
+  CLEAR_REPORTS_STATE,
+  CLEAR_COMPANY_STATE
 } from '../constants.js';
 
 export const login = (email, password) => async (dispatch) => {
@@ -23,8 +25,6 @@ export const login = (email, password) => async (dispatch) => {
 
     const { data } = await axios.post(`${BACKEND_URL}/login`, {email, password}, config);
 
-    //console.log('data', data);
-
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data
@@ -41,6 +41,6 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT});
-  //CLEAR COMPANY
-  //CLEAR REPORTS
+  dispatch({ type: CLEAR_REPORTS_STATE});
+  dispatch({ type: CLEAR_COMPANY_STATE});
 }

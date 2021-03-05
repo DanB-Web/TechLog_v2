@@ -9,6 +9,11 @@ const Query = {
     const report = await ReportDB.findById(id);
     return report;
   },
+  companyDetails: async (root, args, context) => {
+    const { id } = args;
+    const company = await CompanyDB.findById(id);
+    return company;
+  },
   companyReports: async (root, args, context) => {
     const { id } = args;
     const reports = await ReportDB.find({company: id});
