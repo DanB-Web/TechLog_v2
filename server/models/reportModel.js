@@ -1,9 +1,35 @@
 import mongoose from 'mongoose';
 
+//COMMENT SCHEMA
+const commentSchema = mongoose.Schema({
+  user: {
+    type: String,
+    required: true
+  },
+  comment: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: Date,
+    required: true
+  }
+}, {timeStamps: true})
+
 const reportSchema = mongoose.Schema({
   title: {
     type: String,
     required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  company: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Company'
   },
   tags: {
     type: [String],
@@ -23,20 +49,18 @@ const reportSchema = mongoose.Schema({
   images: {
     type: [String]
   },
+  comments: {
+    type: [commentSchema]
+  },
   approved: {
     type: Boolean,
     default: false
   },
-  user: {
+  approvedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    default: null,
     ref: 'User'
   },
-  company: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Company'
-  }
 }, {
   //'Created at' and 'Updated at' fields will be auto created with the below option
   timestamps: true

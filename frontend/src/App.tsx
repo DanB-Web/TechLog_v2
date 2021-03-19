@@ -20,12 +20,17 @@ import Profile from './screens/Profile';
 
 const App = () => {
 
+  //APP STATE
   const [mode, setMode] = useState('light');
+
   const [drawer, setDrawer] = useState(false);
+
+  const [viewReport, setViewReport] = useState(false);  //VIEW REPORT MODAL
+  const [reportDetails, setReportDetails] = useState({});  //REPORT DETAILS FOR MODAL
 
   const dispatch = useDispatch();
 
-  //Toggle light/dark mode
+  //TOGGLE LIGHT/DARK MODE
   const toggleMode = () => {
     if (mode === 'light') {
       trans();
@@ -38,17 +43,17 @@ const App = () => {
     }
   }
 
-  //Transition effect on mode change
+  //TRANSITION ON MODE CHANGE
   const trans = () => {
     document.documentElement.classList.add('transition');
     window.setTimeout(() => {
-    document.documentElement.classList.remove('transition')}, 1000);
+    document.documentElement.classList.remove('transition')}, 500);
   };
 
-  //Toggle side drawer
+  //TOGGLE SIDE DRAWER
   const toggleDrawer = () => setDrawer(!drawer);
 
-  //Logout
+  //LOGOUT
   const logout = () => {
     dispatch(logoutAction());
   }
@@ -56,7 +61,16 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        {drawer && <Backdrop toggleDrawer={toggleDrawer} logout={logout}/>}
+        {drawer && <Backdrop 
+          toggleDrawer={toggleDrawer} 
+          logout={logout} 
+          drawer={drawer}/> 
+        }
+        {viewReport && <Backdrop 
+          setViewReport={setViewReport} 
+          reportDetails={reportDetails} 
+          setReportDetails={setReportDetails}/>
+        }
         <Navbar 
           mode={mode}
           toggleMode={toggleMode}
@@ -65,7 +79,10 @@ const App = () => {
           ></Navbar>
         <Switch>
           <Route path="/" exact component={Login}></Route>
-          <Route path="/search" exact component={SearchReports}></Route>
+          <Route path="/search" 
+                 render={props => <SearchReports {...props} 
+                 setViewReport={setViewReport} 
+                 setReportDetails={setReportDetails}/>}></Route>
           <Route path="/newreport" exact component={NewReport}></Route>
           <Route path="/editreport" exact component={EditReport}></Route>
           <Route path="/company" exact component={Company}></Route>
@@ -77,5 +94,14 @@ const App = () => {
     </Router>
   );
 }
+
+// {drawer && <Backdrop 
+//   toggleDrawer={toggleDrawer} 
+//   logout={logout} 
+//   drawer={drawer}/>}
+// {viewReport && <Backdrop 
+//   setViewReport={setViewReport} 
+//   reportDetails={reportDetails} 
+//   setReportDetails={setReportDetails}/>}
 
 export default App;

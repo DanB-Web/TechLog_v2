@@ -8,7 +8,7 @@ const companies = [
     users: []
   },
   {
-    name: "Reach Subsea AS",
+    name: "Reach Subsea",
     address: "Haugesund, Norway",
     primaryColor: "#ff0000",
     secondaryColor: "#ffffff",
@@ -16,7 +16,7 @@ const companies = [
     users: []
   },
   {
-    name: "DeepOcean AS",
+    name: "DeepOcean",
     address: "Haugesund, Norway",
     primaryColor: "#009999",
     secondaryColor: "#003366",

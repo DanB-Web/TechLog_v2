@@ -1,6 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap");
 button {
-  padding: 1rem;
+  padding: 0.6rem;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
 }
 
 * {
@@ -31,6 +41,23 @@ a:active {
 
 button:hover {
   cursor: pointer;
+}
+
+input[type="text"],
+textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  outline: none;
+  border: 3px solid var(--color-form-border);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  -webkit-box-shadow: 0 0 5px var(--color-tag);
+          box-shadow: 0 0 5px var(--color-tag);
+  border: 1px solid var(--color-tag);
 }
 
 html:focus-within {

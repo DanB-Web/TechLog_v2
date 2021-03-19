@@ -4,7 +4,7 @@ const router = express.Router();
 
 import { createUser, authUser } from './controllers/userControllers.js'
 
-import { createReport } from './controllers/reportsControllers.js';
+import { createReport, addComment } from './controllers/reportsControllers.js';
 import { createCompany } from './controllers/companyControllers.js';
 
 router.get('/test', (req, res) => {
@@ -21,5 +21,7 @@ router.post('/report', createReport);
 //COMPANY ROUTES
 router.post('/company', createCompany);
 
+//COMMENTS ROUTES
+router.post('/comment', addComment);
 
 export { router };

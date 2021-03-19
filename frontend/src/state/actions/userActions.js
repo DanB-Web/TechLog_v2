@@ -30,6 +30,10 @@ export const login = (email, password) => async (dispatch) => {
       payload: data
     })
 
+    //SET USER IN LOCAL STORAGE
+    console.log(data);
+    localStorage.setItem('userInfo', JSON.stringify(data));
+
   } catch (err) {
     
     dispatch({
@@ -40,6 +44,7 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT});
   dispatch({ type: CLEAR_REPORTS_STATE});
   dispatch({ type: CLEAR_COMPANY_STATE});

@@ -10,7 +10,7 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
   const user = useSelector((state) => state.userLogin);
   const { loggedIn, userInfo: { isAdmin, isDan } } = user;
 
-  const companyName = useSelector((state) => state.fetchCompany.company.name);
+  const company = useSelector((state) => state.company.company);
   
   return (
     <nav className="navbar">
@@ -18,7 +18,7 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
       <div className="navbar-title">
         <i className="fas fa-cogs fa-3x"></i>
         <Link to='/search'><h1>TechLog</h1></Link>
-        {companyName && <h1 className="navbar-company-name"> - {companyName}</h1>}
+        {company && <h1 className="navbar-company-name"> - {company.name}</h1>}
       </div>
       
       <div className="navbar-links">

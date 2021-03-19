@@ -40,19 +40,31 @@ export async function getReports(id: any) {
       companyReports(id:$id){
         id
         title
+        user {
+            id
+            name
+            email
+        }
+        company {
+          id
+          name
+        }
         tags
         shortDesc
         longDesc
         steps
         images
-        user {
+        comments {
+          id
+          user
+          comment
+          time
+        }
+        approved
+        approvedBy {
           id
           name
           email
-        }
-        company {
-          id
-          name
         }
       }
     }

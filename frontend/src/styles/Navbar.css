@@ -64,7 +64,8 @@
 
 .navbar .navbar-links button {
   position: absolute;
-  top: 5px;
+  padding: 0.7rem;
+  top: 3px;
   right: 5px;
   outline: none;
   background-color: transparent;
@@ -83,6 +84,7 @@
   position: absolute;
   top: 20%;
   right: 2rem;
+  padding: 1rem;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--color-secondary);

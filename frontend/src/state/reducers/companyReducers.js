@@ -5,7 +5,7 @@ import {
   CLEAR_COMPANY_STATE
 } from '../constants.js';
 
-export const fetchCompanyReducer = (state = {}, action) => {
+export const fetchCompanyReducer = (state = {name: null}, action) => {
   switch (action.type) {
     case FETCH_COMPANY_REQUEST:
       return { ...state }

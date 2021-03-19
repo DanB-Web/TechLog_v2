@@ -37,6 +37,11 @@ const Report = {
     const { company } = args;
     const reportCompany = await CompanyDB.findOne({_id: company});
     return reportCompany;
+  },
+  approvedBy: async (args) => {
+    const { approvedBy }= args;
+    const reportApproved = await UserDB.findOne({_id: approvedBy});
+    return reportApproved;
   }
 }
 
@@ -55,7 +60,6 @@ const Company = {
 
 const User = {
   company: async (args) => {
-    console.log('args', args);
     const { id } = args;
     const userDetails = await UserDB.findOne({_id: id});
     const { company } = userDetails;
@@ -69,6 +73,13 @@ const User = {
   }
 }
 
-const resolvers = { Query, Report, Company, User }
+const Comment = {
+  time: async (args) => {
+    const { time } = args;
+    return time;
+  }
+}
+
+const resolvers = { Query, Report, Company, User, Comment }
 
 export { resolvers }; 

@@ -80,6 +80,13 @@ const importData = async () => {
     reports[7].user = createdUsers[4]._id;
     reports[7].company = createdCompanies[2]._id;
 
+    //ADD ADMIN APPROVAL TO SOME REPORTS
+    reports[3].approved = true;
+    reports[3].approvedBy = createdUsers[1]._id;
+    reports[6].approved = true;
+    reports[6].approvedBy = createdUsers[3]._id;
+
+
     await Report.insertMany(reports);
 
     //Successful seed
