@@ -10,14 +10,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducer = combineReducers({
   userLogin : userLoginReducer,
-  fetchReports : fetchReportsReducer,
-  fetchCompany: fetchCompanyReducer
+  company: fetchCompanyReducer,
+  reports : fetchReportsReducer
 });
 
-//LOCAL STORAGE?
-
+//LOCAL STORAGE FOR LOGGED IN USER
+const userFromStorage = localStorage.getItem('userInfo')
+  ? { userInfo: JSON.parse(localStorage.getItem('userInfo')), loggedIn: true}
+  : { userInfo: { isAdmin: false, isDan: false}, loggedIn: false}
+ 
 const initialState = {
-  userLogin: { userInfo: { isAdmin: false, isDan: false}, loggedIn: false},
+  userLogin: userFromStorage,
   company: {},
   reports: []
 };

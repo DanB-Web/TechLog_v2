@@ -38,14 +38,14 @@
   }
 }
 
-@keyframes slideIn {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
+// @keyframes slideIn {
+//   0% {
+//     transform: translateX(100%);
+//   }
+//   100% {
+//     transform: translateX(0);
+//   }
+// }
 
 @media screen and (max-width: 550px) {
   .drawer-container {

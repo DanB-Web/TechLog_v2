@@ -2,8 +2,8 @@
 
 //IMPORT GLOBAL STYLES
 @import "./_config.scss";
-@import "./_forms.scss";
 @import "./_buttons.scss";
+@import "./animations.scss";
 
 //CSS RESET
 * {
@@ -35,11 +35,29 @@ button:hover {
   cursor: pointer;
 }
 
+//SOFT SHADOW ON TEXT INPUTS
+input[type="text"],
+textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  outline: none;
+  border: 3px solid var(--color-form-border);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px var(--color-tag);
+  border: 1px solid var(--color-tag);
+}
+
+//SMOOTH SCROLL
 html:focus-within {
   scroll-behavior: smooth;
 }
 
-//Backdrop Styles
+//BACKDROP STYLES
 .backdrop-container {
   position: fixed;
   display: flex;
@@ -50,4 +68,9 @@ html:focus-within {
   height: 100vh;
   background: rgba(0, 0, 0, 0.75);
   z-index: 10;
+}
+
+//LOADER STYLES
+.beat-loader {
+  margin-top: 5rem;
 }

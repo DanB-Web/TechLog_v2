@@ -21,8 +21,10 @@ type Report {
   steps: [String]
   images: [String]
   user: User!
+  comments: [Comment]
   company: Company!
   approved: Boolean
+  approvedBy: User
 }
 
 type Company {
@@ -44,4 +46,13 @@ type User {
   isAdmin: Boolean!
   isDan: Boolean!
   reports: [Report!]
+}
+
+scalar Date
+
+type Comment {
+  id: ID!
+  user: String!
+  comment: String!
+  time: Date!
 }

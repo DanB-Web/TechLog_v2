@@ -32,4 +32,24 @@ const createReport = async (req, res) => {
   } 
 }
 
-export { createReport };
+const addComment = async (req, res) => {
+  try {
+    const {reportId, user, comment } = req.body;
+
+    const report = await Report.findById(reportId);
+    report.comments.push({
+      user, 
+      comment, 
+      time: Date.now()
+    });
+    const updatedReport = await report.save();
+
+    res.status(201).send(updatedReport);
+
+  } catch (err) {
+    console.log(`ADD REPORT COMMENT ERROR: ${err}`.bold.red);
+    res.status(500).json('ADD REPORT COMMENT ERROR');  
+  }
+}
+
+export { createReport, addComment };
