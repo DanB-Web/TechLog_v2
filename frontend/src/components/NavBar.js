@@ -24,7 +24,6 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
       <div className="navbar-links">
         {(loggedIn) &&<Link to='/search'>Search</Link>}
         {(loggedIn) &&<Link to='/newreport'>New Report</Link>}
-        {(loggedIn & isAdmin) ? <Link to='/editreport'>Edit Report</Link> : null}
         {(loggedIn & isAdmin) ? <Link to='/company'>My Company</Link> : null}
         {(loggedIn & isAdmin & isDan) ? <Link to='/addcompany'>Add Company</Link> : null}
         {(loggedIn) && <Link to='/profile'>My Profile</Link>}

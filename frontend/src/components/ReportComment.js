@@ -6,13 +6,13 @@ import '../styles/ReportDetails.scss';
 
 const ReportComment = ({comment}) => {
 
-  console.log(comment);
-
   return (
     <div className="report-comment">
-      {comment.comment}
-      {comment.user}
-      {Moment(comment.time).format("MMM Do h:mm a")}
+      <p>{comment.comment}</p>
+      <div className="comment-details">
+        <p>{comment.user}</p>
+        <p>{Moment(comment.time).format("MMM Do h:mm a")}</p>
+      </div>
     </div>
   )
 }

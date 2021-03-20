@@ -1,0 +1,45 @@
+.edit-report-container {
+  width: 60%;
+  margin: auto;
+}
+
+.edit-report-container .edit-report-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.edit-report-container .edit-report-form label {
+  border-bottom: 2px solid var(--color-form-border);
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.edit-report-container .edit-report-form input {
+  padding: 0.3rem;
+}
+
+.edit-report-container .edit-report-form input:focus,
+.edit-report-container .edit-report-form textarea:focus {
+  border: 3px solid var(--color-tag);
+}
+
+.edit-report-container .edit-report-form .edit-report-title {
+  font-size: 1.2rem;
+}
+
+.edit-report-container .edit-report-form .report-steps-ul {
+  border: 1px solid blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/*# sourceMappingURL=EditReport.css.map */

@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
+/*NOTE MODAL IS OUTSIDE OF SWITCH SO HAVE TO USE LINK TAG TO ROUTE TO '/editreport'*/
+import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
 import ReportComment from './ReportComment';
+import Alert from './Alert';
 
 import {addComment} from '../utils/rest';
 
 import '../styles/ReportDetails.scss';
 
-const ReportDetail = ({setViewReport, reportDetails, setReportDetails}) => {
+const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
 
   const [newComment, setNewComment] = useState('');
+  const [commentSuccess, setCommentSuccess] = useState(false);
+  const [commentFailure, setCommentFailure] = useState(false);
 
   const loggedUser = useSelector((state) => state.userLogin);
-  const {userInfo: {_id, name, isAdmin}} = loggedUser;
+  const {userInfo: {name, isAdmin}} = loggedUser;
 
   const {
     id,
@@ -29,20 +34,27 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails}) => {
     comments
   } = reportDetails;
 
-  const closeReport = () => {
+  const backToSearchHandler = () => {
     setViewReport(false);
     setReportDetails({});
   }
 
-  const approveReport = () => {
-    console.log('Admin id', _id);
+  const toEditHandler = () => {
+    setViewReport(false);
   }
 
   const addCommentHandler = async (e) => {
     e.preventDefault();
     //SEND REPORT ID, COMMENT AND USER COMMENTING
-    const reply = await addComment(id, newComment, name);
-    console.log('reply', reply);
+    if(newComment !== '') {
+      const reply = await addComment(id, newComment, name);
+      if (reply.status === 201) {
+        setCommentSuccess(true);
+        setNewComment('');
+      } else {
+        setCommentFailure(true);
+      }
+    }  
   }
 
   return (
@@ -51,11 +63,9 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails}) => {
       {approved ? 
         <div className="report-approved">
           <p>Reviewed by {approvedBy.name}</p>
-          {isAdmin && <button>UNREVIEW</button>}
         </div> :
         <div className="report-unapproved">
           <p>Awaiting review...</p>
-          {isAdmin && <button onClick={approveReport}>APPROVE</button>}
         </div>  
       }
 
@@ -99,23 +109,38 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails}) => {
       </>}
       
       <div className="report-details-buttons">
-        <button onClick={closeReport}>BACK TO SEARCH</button>
-        {isAdmin && <button>EDIT REPORT</button>}
+        <button onClick={backToSearchHandler}>BACK TO SEARCH</button>
+        {isAdmin && 
+          <Link to='/editreport'>
+          <button onClick={toEditHandler}>EDIT REPORT</button>
+          </Link>}
       </div>
       
-
-      {comments && <>
-        <h4>Comments</h4>
-        {console.log(comments)}
+      <h4>Comments</h4>
+      {comments.length > 0 ? <>
         <ul>
           {comments.map((comment, index) => {
             return <ReportComment key={index} comment={comment}/>
           })}
         </ul>
-      </>}
+      </> : <p>No comments yet...</p>}
+
+      {commentSuccess && 
+        <Alert 
+          message={'Comment submitted!'}
+          variant={'success'}
+        ></Alert>}
+      {commentFailure && 
+        <Alert 
+          message={'Something went wrong...'}
+          variant={'danger'}
+        ></Alert>}
 
       <form className="submit-comment" onSubmit={addCommentHandler}>
-        <textarea onChange={(e)=>{setNewComment(e.target.value)}}/>
+        <textarea 
+          value={newComment} 
+          onChange={(e)=>{setNewComment(e.target.value)}}
+        />
         <button type="submit">ADD COMMENT</button>
       </form>
 
