@@ -52,6 +52,10 @@ textarea:focus {
   border: 1px solid var(--color-tag);
 }
 
+textarea {
+  resize: none;
+}
+
 //SMOOTH SCROLL
 html:focus-within {
   scroll-behavior: smooth;

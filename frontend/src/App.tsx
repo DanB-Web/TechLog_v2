@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { useDispatch } from 'react-redux';
 import { logout as logoutAction } from './state/actions/userActions';
 
-
 import './styles/App.css';
 
 import Navbar from './components/NavBar';
@@ -26,7 +25,7 @@ const App = () => {
   const [drawer, setDrawer] = useState(false);
 
   const [viewReport, setViewReport] = useState(false);  //VIEW REPORT MODAL
-  const [reportDetails, setReportDetails] = useState({});  //REPORT DETAILS FOR MODAL
+  const [reportDetails, setReportDetails] = useState({});  //REPORT DETAILS FOR MODAL / EDIT
 
   const dispatch = useDispatch();
 
@@ -84,7 +83,11 @@ const App = () => {
                  setViewReport={setViewReport} 
                  setReportDetails={setReportDetails}/>}></Route>
           <Route path="/newreport" exact component={NewReport}></Route>
-          <Route path="/editreport" exact component={EditReport}></Route>
+          <Route path="/editreport" 
+                 render={props => <EditReport {...props}
+                 reportDetails={reportDetails} 
+                 setReportDetails={setReportDetails}
+                 />}></Route>
           <Route path="/company" exact component={Company}></Route>
           <Route path="/addcompany" exact component={AddCompany}></Route>
           <Route path="/profile" exact component={Profile}></Route>
@@ -94,14 +97,5 @@ const App = () => {
     </Router>
   );
 }
-
-// {drawer && <Backdrop 
-//   toggleDrawer={toggleDrawer} 
-//   logout={logout} 
-//   drawer={drawer}/>}
-// {viewReport && <Backdrop 
-//   setViewReport={setViewReport} 
-//   reportDetails={reportDetails} 
-//   setReportDetails={setReportDetails}/>}
 
 export default App;

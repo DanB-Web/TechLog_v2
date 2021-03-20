@@ -1,0 +1,23 @@
+.edit-report-container {
+  width: 60%;
+  margin: auto;
+  .edit-report-form {
+    display: flex;
+    flex-direction: column;
+    label {
+      border-bottom: 2px solid var(--color-form-border);
+      margin-top: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+    input {
+      padding: 0.3rem;
+    }
+    input:focus,
+    textarea:focus {
+      border: 3px solid var(--color-tag);
+    }
+    .edit-report-title {
+      font-size: 1.2rem;
+    }
+  }
+}
