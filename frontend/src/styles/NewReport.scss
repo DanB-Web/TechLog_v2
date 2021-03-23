@@ -1,0 +1,17 @@
+.new-report-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  .new-report-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

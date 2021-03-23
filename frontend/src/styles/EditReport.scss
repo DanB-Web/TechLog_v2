@@ -4,6 +4,7 @@
   .edit-report-form {
     display: flex;
     flex-direction: column;
+    margin: 2rem;
     label {
       border-bottom: 2px solid var(--color-form-border);
       margin-top: 0.3rem;
@@ -18,6 +19,10 @@
     }
     .edit-report-title {
       font-size: 1.2rem;
+    }
+    .edit-report-searchtags {
+      display: flex;
+      justify-content: center;
     }
   }
 }
