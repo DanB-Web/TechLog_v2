@@ -32,6 +32,11 @@ const createReport = async (req, res) => {
   } 
 }
 
+const editReport = async (req, res) => {
+  console.log(req.body);
+  res.status(200);
+}
+
 const addComment = async (req, res) => {
   try {
     const {reportId, user, comment } = req.body;
@@ -52,4 +57,4 @@ const addComment = async (req, res) => {
   }
 }
 
-export { createReport, addComment };
+export { createReport, editReport, addComment };
