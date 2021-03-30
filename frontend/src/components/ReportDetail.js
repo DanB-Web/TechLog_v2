@@ -57,6 +57,8 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
     }  
   }
 
+  console.log(reportDetails);
+
   return (
     <div className="report-details" style={{animation: 'slideUp 1s forwards'}}>
 
@@ -99,11 +101,16 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
             </ul>
       </>}
     
-      {images && <>
+      {images.length > 0 && <>
         <h4>Images</h4>
         <ul>
-          {images.map((image, index)  => {
-              return <li key={index}>{image}</li>
+          {images.map(image  => {
+              return <img 
+                className="report-detail-image"
+                key={image.assetId}
+                src={image.imageUrl} 
+                alt={image.assetId}
+                />
             })}
         </ul>
       </>}

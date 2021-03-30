@@ -7,9 +7,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -20,9 +20,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -33,9 +33,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -46,9 +46,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -59,9 +59,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -72,9 +72,9 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
@@ -85,21 +85,23 @@ const reports = [
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    approved: null,
+    approved: false,
     approvedBy: null
   },
   {
     title: "Test Title 8",
+    user: null,
+    company: null,
     tags: ["one", "two", "three"],
     shortDesc: "Short description",
     longDesc: "Looooooong description",
     steps: ["step one", "step two", "step three"],
-    images: ["url1", "url2", "url3"],
+    images: [],
     comments: [],
-    user: null,
-    company: null
+    approved: false,
+    approvedBy: null
   }
 ]
 

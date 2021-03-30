@@ -16,6 +16,38 @@ const commentSchema = mongoose.Schema({
   }
 }, {timeStamps: true})
 
+//IMAGE SCHEMA
+const imageSchema = mongoose.Schema({
+    assetId: {
+      type: String,
+      required: true
+    },
+    publicId: {
+      type: String,
+      required: true
+    },
+    imageUrl: {
+      type: String,
+      required: true
+    }
+}, {timeStamps: true})
+
+//APPROVEDBY SCHEMA
+const approvedBySchema = mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
+})
+
 const reportSchema = mongoose.Schema({
   title: {
     type: String,
@@ -47,7 +79,7 @@ const reportSchema = mongoose.Schema({
     type: [String]
   },
   images: {
-    type: [String]
+    type: [imageSchema]
   },
   comments: {
     type: [commentSchema]
@@ -58,6 +90,7 @@ const reportSchema = mongoose.Schema({
   },
   approvedBy: {
     type: mongoose.Schema.Types.ObjectId,
+    //type: approvedBySchema,
     default: null,
     ref: 'User'
   },

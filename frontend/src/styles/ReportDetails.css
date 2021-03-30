@@ -157,4 +157,23 @@
   font-size: 0.8rem;
   padding: 0.2rem;
 }
+
+.report-details::-webkit-scrollbar {
+  width: 16px;
+  /* width of the entire scrollbar */
+}
+
+.report-details::-webkit-scrollbar-track {
+  background: var(--color-border);
+  /* color of the tracking area */
+}
+
+.report-details::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+  border: 3px solid var(--color-border);
+  /* creates padding around scroll thumb */
+}
 /*# sourceMappingURL=ReportDetails.css.map */

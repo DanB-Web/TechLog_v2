@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
+import { submitReport } from '../utils/rest';
+
 import Checkbox from '../components/Checkbox';
 import Images from '../components/Images';
+import Alert from '../components/Alert';
+
+import { BeatLoader } from 'react-spinners';
 
 import '../styles/NewReport.scss';
 
@@ -12,6 +17,10 @@ const NewReport = ({ history }) => {
   const auth = useSelector((state) => state.userLogin.loggedIn);
   !auth && history.push('/login');
 
+  const user = useSelector((state) => state.userLogin.userInfo._id)
+  const company = useSelector((state) =>state.userLogin.userInfo.company)
+
+  //FORM INPUT STATE
   const [reportTitle, setReportTitle] = useState('');
   const [reportTags, setReportTags] = useState([]);
   const [reportShortDesc, setReportShortDesc] = useState('');
@@ -22,12 +31,36 @@ const NewReport = ({ history }) => {
   const [customTag, setCustomTag] = useState('');
   const [newStep, setNewStep] = useState('');
 
-  const formSubmitHandler = (e) => {
+  //FORM SUBMISSION STATE
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const checkboxes = document.querySelectorAll('.searchtag-checkbox');
-    const copy = [...reportTags];
-    checkboxes.forEach(checkbox => checkbox.checked && copy.push(checkbox.value));
-    setReportTags(copy);
+
+    setFormSubmitted(true);
+
+    const newReport = {
+      title: reportTitle,
+      user: user,
+      company: company,
+      tags: reportTags,
+      shortDesc: reportShortDesc,
+      longDesc: reportLongDesc,
+      steps: reportSteps,
+      images: reportImages
+    }
+
+    const reply = await submitReport(newReport);
+
+    setFormSubmitted(false);
+
+    if (reply.status === 201) {
+      setSubmitSuccess(true)
+    } else {
+      setSubmitError(true)
+    }
   }
 
   const customTagHandler = (e) => {
@@ -62,6 +95,26 @@ const NewReport = ({ history }) => {
     setReportSteps(copy); 
   }
 
+  if (formSubmitted) {
+    return <div className="beat-loader">
+        <BeatLoader size={40} color={'#C0C0C0'}/>
+      </div>
+  }
+
+  if (submitSuccess) {
+    return <Alert
+        message={'Form submitted!'}
+        variant={'success'}
+      ></Alert>
+  }
+
+  if (submitError) {
+    return <Alert
+      message={'Form submission error...'}
+      variant={'danger'}
+    ></Alert>
+  }
+
   return (
     <div className="new-report-container">
       
@@ -69,6 +122,7 @@ const NewReport = ({ history }) => {
 
         <label>Report Title</label>
         <input 
+          required
           className="new-report-title" 
           type="text" 
           value={reportTitle} 
@@ -98,12 +152,14 @@ const NewReport = ({ history }) => {
 
         <label>Report Summary</label>  
         <textarea 
+          required
           value={reportShortDesc} 
           onChange={(e) => setReportShortDesc(e.target.value)}
         ></textarea> 
 
         <label>Description</label>
         <textarea 
+          required
           value={reportLongDesc} 
           onChange={(e) => setReportLongDesc(e.target.value)} 
         ></textarea>   
@@ -113,11 +169,16 @@ const NewReport = ({ history }) => {
           {reportSteps.length > 0 ? 
           reportSteps.map((step, index) => {
             return <li key={index} onClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
-          <p>No steps yet...</p>}
-      
-          
+          <Alert
+            message={'No steps added yet...'}
+            variant={'info'}
+          ></Alert>}  
         </ul> 
-        <input type="text" onChange={(e) => setNewStep(e.target.value)} value={newStep}></input>
+
+        <input type="text" 
+          onChange={(e) => setNewStep(e.target.value)} 
+          value={newStep}
+        ></input>
         <button onClick={(e) => addStepHandler(e)}>Add Step</button>
 
         <Images
@@ -127,7 +188,8 @@ const NewReport = ({ history }) => {
 
         <button type="submit">Submit Report</button>      
         
-        </form>
+      </form>
+
     </div>
   )
 }

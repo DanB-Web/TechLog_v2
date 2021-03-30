@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import { createUser, authUser } from './controllers/userControllers.js'
+import { createUser, authUser, changePassword } from './controllers/userControllers.js'
 
 import { createReport, editReport, addComment } from './controllers/reportsControllers.js';
 import { createCompany } from './controllers/companyControllers.js';
@@ -15,6 +15,7 @@ router.get('/test', (req, res) => {
 //USER ROUTES
 router.post('/login', authUser)
 router.post('/user', createUser);
+router.post('/password', changePassword);
 
 //REPORT ROUTES
 router.post('/report', createReport);

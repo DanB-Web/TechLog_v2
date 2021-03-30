@@ -2,27 +2,9 @@ import { Report } from '../models/reportModel.js';
 
 const createReport = async (req, res) => {
   try {
-    const { 
-      title, 
-      tags, 
-      shortDesc, 
-      longDesc, 
-      steps, 
-      images, 
-      user, 
-      company 
-    } = req.body;
+    const { title, tags, shortDesc, longDesc, steps, images, user, company } = req.body.newReport;
 
-    const update = await Report.create( { 
-      title, 
-      tags, 
-      shortDesc, 
-      longDesc, 
-      steps, 
-      images, 
-      user, 
-      company 
-    });
+    const update = await Report.create( { title, tags, shortDesc, longDesc, steps, images, user, company });
 
     res.status(201).send(update);
 
@@ -33,8 +15,29 @@ const createReport = async (req, res) => {
 }
 
 const editReport = async (req, res) => {
-  console.log(req.body);
-  res.status(200);
+
+  try {
+    const { id, title, tags, shortDesc, longDesc, steps, comments, approved, approvedBy } = req.body.editedReport;
+
+    const report = await Report.findById(id);
+
+    report.title = title;
+    report.tags = tags;
+    report.shortDesc = shortDesc;
+    report.longDesc = longDesc;
+    report.steps = steps;
+    report.comments = comments;
+    report.approved = approved;
+    report.approvedBy = approvedBy;
+
+    const updatedReport = await report.save();
+
+    res.status(200).send(updatedReport);
+
+  } catch (err) {
+    console.log(`EDIT REPORT COMMENT ERROR: ${err}`.bold.red);
+    res.status(500).json('EDIT REPORT ERROR');
+  }
 }
 
 const addComment = async (req, res) => {

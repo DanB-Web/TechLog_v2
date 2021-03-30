@@ -45,4 +45,31 @@ const authUser = async (req, res) => {
   }
 }
 
-export { createUser, authUser };
+const changePassword = async (req, res) => {
+
+  try {
+    const {userId, password, newPassword} = req.body;
+
+    let passwordCheck = false;
+    const user = await User.findById(userId);
+
+    if (user) {
+      passwordCheck = await user.matchPassword(password);
+    }
+
+    if (user && passwordCheck) {
+      user.password = newPassword;
+      await user.save();
+      res.status(200).json({message: 'Password updated!'});
+    } else {
+      res.status(403).json({message: 'Password update error!'});
+    }
+    
+  } catch (err) {
+      console.log(err);
+      res.status(401);
+      throw new Error('Change password error!')
+  }
+}
+
+export { createUser, authUser, changePassword };

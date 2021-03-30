@@ -1,5 +1,4 @@
 .images-container {
-  border: 1px solid blue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7,5 +6,25 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.images-container .images-uploaded {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.images-container .images-uploaded .image-thumbnail {
+  width: 150px;
+  border: 2px solid transparent;
+}
+
+.images-container .images-uploaded .image-thumbnail:hover {
+  border: 2px solid red;
 }
 /*# sourceMappingURL=Images.css.map */

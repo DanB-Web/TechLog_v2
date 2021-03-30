@@ -19,7 +19,7 @@ type Report {
   shortDesc: String!
   longDesc: String!
   steps: [String]
-  images: [String]
+  images: [Image]
   user: User!
   comments: [Comment]
   company: Company!
@@ -55,4 +55,11 @@ type Comment {
   user: String!
   comment: String!
   time: Date!
+}
+
+type Image {
+  id: ID!
+  assetId: String!
+  publicId: String!
+  imageUrl: String!
 }
