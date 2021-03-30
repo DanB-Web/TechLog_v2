@@ -3,14 +3,76 @@ button {
   padding: 0.6rem;
   background-color: var(--color-primary);
   color: var(--color-secondary);
-  border: 1px solid var(--color-secondary);
+  border: 2px solid var(--color-secondary);
   border-radius: 5px;
 }
 
 button:hover {
   background-color: var(--color-secondary);
   color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
 }
 
 * {
@@ -24,6 +86,15 @@ button:hover {
 body {
   min-height: 100vh;
   line-height: 1.5;
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
 }
 
 ul,
@@ -60,6 +131,10 @@ textarea:focus {
   border: 1px solid var(--color-tag);
 }
 
+textarea {
+  resize: none;
+}
+
 html:focus-within {
   scroll-behavior: smooth;
 }
@@ -78,5 +153,9 @@ html:focus-within {
   height: 100vh;
   background: rgba(0, 0, 0, 0.75);
   z-index: 10;
+}
+
+.beat-loader {
+  margin-top: 5rem;
 }
 /*# sourceMappingURL=App.css.map */

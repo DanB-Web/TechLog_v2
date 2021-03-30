@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { BeatLoader } from 'react-spinners';
+import Switch from 'react-switch';
 
 import { editReport } from '../utils/rest';
 
+import Images from '../components/Images';
 import ReportComment from '../components/ReportComment';
+import Alert from '../components/Alert';
 
 import '../styles/EditReport.scss';
 
@@ -17,25 +22,9 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   !auth && history.push('/login');
 
   const loggedInUser = useSelector((state) => state.userLogin.userInfo);
-  const { _id } = loggedInUser;
 
   //EXTRACT VALUES FROM REPORT TO EDIT
-  const {
-    id,
-    title,
-    user,
-    tags, 
-    shortDesc, 
-    longDesc, 
-    steps, 
-    images, 
-    comments,
-    approved
-  } = reportDetails;
-
-  console.log(reportDetails);
-  console.log('user', user);
-  console.log('admin', _id);
+  const { id, title, user, tags, shortDesc, longDesc, steps, images, comments, approved, approvedBy } = reportDetails;
 
   const { name, email } = user;
 
@@ -45,19 +34,23 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   const [editShortDesc, setEditShortDesc] = useState(shortDesc);
   const [editLongDesc, setEditLongDesc] = useState(longDesc);
   const [editSteps, setEditSteps] = useState(steps);
-  //const [editImages, setEditImages] = useState(images);
+  const [editImages, setEditImages] = useState(images);
   const [editComments, setEditComments] = useState(comments);
 
   //FORM LOGIC
   const [newTag, setNewTag] = useState('');
   const [newStep, setNewStep] = useState('');
-  const [reportApproved, setFormApproved] = useState(approved);
 
-  //LOCAL STATE
+  //FORM APPROVAL STATE
+  const [reportApproved, setReportApproved] = useState(approved);
+  const [reportApprovedUser, setReportApprovedUser] = useState(approvedBy);
+
+  //SUBMISSION STATE
   const [submitted, setSubmitted] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   useEffect(() => {
-
   }, [newTag]);
 
   //FORM SUBMISSION HANDLER
@@ -72,12 +65,18 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
       steps: editSteps,
       comments: editComments,
       approved: reportApproved,
-      approvedBy: _id
+      approvedBy: reportApprovedUser,
     }
 
+    setSubmitted(true);
     const reply = await editReport(editedReport);
+    setSubmitted(false);
 
-    console.log(reply);
+    if (reply.status === 200) {
+      setSubmitSuccess(true);
+    } else {
+      setSubmitError(true);
+    }
   }
 
   //SEARCH TAG HANDLERS
@@ -131,8 +130,42 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
     setEditComments(filtered);
   }
 
+  //APPROVAL HANDLER
+  const approvedHandler = () => {
+    //UNAPPROVE
+    if (reportApproved) {
+      setReportApproved(false);
+      setReportApprovedUser(null);
+    } else {
+    //APPROVE AS LOGGED IN USER  
+      setReportApproved(true);
+      setReportApprovedUser(loggedInUser);
+    }
+  }
+
   if (submitted) {
-    return <p>Loading...</p>
+    return  <div className="beat-loader">
+            <BeatLoader size={40} color={'#C0C0C0'}/>
+            </div>
+  }
+
+  if (submitSuccess) {
+    return  <div>
+              <Alert
+              message={'Form edit submitted!'}
+              variant={'success'}
+              ></Alert> 
+              <Link to="/search">
+                <button>Back to search</button>
+              </Link>
+            </div>
+  }
+
+  if (submitError) {
+    return  <Alert
+            message={'Form submission error!'}
+            variant={'danger'}
+            ></Alert> 
   }
 
   return (
@@ -142,6 +175,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
         <label>Title</label>
         <input 
+          required
           className="edit-report-title" 
           type="text" value={editTitle} 
           onChange={(e) => setEditTitle(e.target.value)}
@@ -168,40 +202,57 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
         <label>Short Description</label>
         <textarea 
-          value={shortDesc} 
+          required
+          value={editShortDesc} 
           onChange={(e) => setEditShortDesc(e.target.value)}
          ></textarea>
 
         <label>Long Description</label>
         <textarea 
-          value={longDesc} 
+          required
+          value={editLongDesc} 
           onChange={(e) => setEditLongDesc(e.target.value)}
         ></textarea>
 
         <label>Steps</label>
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="edit-report-steps">
-              {(provided) => (
-                <ul className="report-steps-ul" {...provided.droppableProps} ref={provided.innerRef}>
-                  {editSteps.map((step, index) => {
-                    return (
-                      <Draggable key={step} draggableId={step} index={index}>
-                        {(provided) => (
-                          <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>{index + 1}: {step} <button onClick={removeStepHandler}>X</button>
-                          </li> 
-                        )}
-                      </Draggable>   
-                    );
-                  })}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
-        <input type="text" value={newStep} onChange={(e) => {setNewStep(e.target.value)}}></input>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="edit-report-steps">
+            {(provided) => (
+              <ul className="report-steps-ul" {...provided.droppableProps} ref={provided.innerRef}>
+                {editSteps.map((step, index) => {
+                  return (
+                    <Draggable key={step} draggableId={step} index={index}>
+                      {(provided) => (
+                        <li {...provided.draggableProps} 
+                            {...provided.dragHandleProps} 
+                            ref={provided.innerRef}
+                            >{index + 1}: {step} 
+                            <button onClick={removeStepHandler}>X</button>
+                        </li>)}
+                    </Draggable>);
+                })}
+                {provided.placeholder}
+              </ul>)}
+          </Droppable>
+        </DragDropContext>
+
+        <input 
+          type="text" 
+          value={newStep} 
+          onChange={(e) => {setNewStep(e.target.value)}}
+        ></input>
         <button onClick={addStepHandler}>Add Step</button>
 
-        <label>Images</label>
+        <Images
+          reportImages={editImages}
+          setReportImages={setEditImages}
+        />
+
+        <label>
+          <span>Report Approved:</span>
+          <Switch onChange={approvedHandler} checked={reportApproved} />
+          <span>{reportApproved && <p>{reportApprovedUser.name}</p>}</span>
+        </label>
 
         <button type="submit">SUBMIT</button>
         <label>Comments</label>

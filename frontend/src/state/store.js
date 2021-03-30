@@ -18,10 +18,15 @@ const reducer = combineReducers({
 const userFromStorage = localStorage.getItem('userInfo')
   ? { userInfo: JSON.parse(localStorage.getItem('userInfo')), loggedIn: true}
   : { userInfo: { isAdmin: false, isDan: false}, loggedIn: false}
+
+//LOCAL STORAGE FOR LOGGED IN COMPANY
+const companyFromStorage = localStorage.getItem('companyInfo')
+  ? { company: JSON.parse(localStorage.getItem('companyInfo'))}
+  : {}
  
 const initialState = {
   userLogin: userFromStorage,
-  company: {},
+  company: companyFromStorage,
   reports: []
 };
 

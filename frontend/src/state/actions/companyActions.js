@@ -27,6 +27,9 @@ export const fetchCompany = () => async (dispatch, getState) => {
 
     changeScheme(primaryColor, secondaryColor);
 
+    //SET COMPANY IN LOCAL STORAGE
+    localStorage.setItem('companyInfo', JSON.stringify(companyDetails));
+
   } catch (err) {
     dispatch({
       type: FETCH_COMPANY_FAILURE,

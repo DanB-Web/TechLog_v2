@@ -53,7 +53,12 @@ export async function getReports(id: any) {
         shortDesc
         longDesc
         steps
-        images
+        images {
+          id
+          assetId
+          publicId
+          imageUrl
+        }
         comments {
           id
           user

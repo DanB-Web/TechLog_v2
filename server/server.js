@@ -28,6 +28,13 @@ app.use(
   express.json()
 );
 
+//IMAGE UPLOAD MIDDLEWARE
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+//ENABLE PRE FLIGHT FOR CORS
+//app.options('*', cors());
+
 //APOLLO SERVER CONFIG
 const typeDefs = gql(fs.readFileSync('./graphql/schema.graphql', {encoding: 'utf8'}));
 const context = ({ req }) => ({
