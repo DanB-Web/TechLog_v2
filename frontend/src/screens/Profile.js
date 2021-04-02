@@ -1,10 +1,9 @@
 import React, {useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { passwordChange } from '../state/actions/userActions';
 
 import { BeatLoader } from 'react-spinners';
-
-import { changePassword } from '../utils/rest';
 
 import Alert from '../components/Alert';
 
@@ -15,16 +14,17 @@ const Profile = ({ history }) => {
   const auth = useSelector((state) => state.userLogin.loggedIn);
   !auth && history.push('/login');
 
-  const user = useSelector((state) => state.userLogin.userInfo._id)
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.userLogin.userInfo._id);
+  const passwordChangeState = useSelector((state) => state.passwordChange);
+  const { loading, message, error } = passwordChangeState;
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const [passwordMismatch, setPasswordMismatch] = useState(false);
-  const [passwordChanged, setPasswordChanged] = useState(false);
-  const [passwordChangedError, setPasswordChangedError] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const changePasswordHandler = async (e) => {
     e.preventDefault();
@@ -32,21 +32,7 @@ const Profile = ({ history }) => {
       setPasswordMismatch(true);
       return;
     }
-    setPasswordMismatch(false);
-    setPasswordChanged(false);
-    setPasswordChangedError(false);
-    setLoading(true);
-
-    const reply = await changePassword(user, currentPassword, newPassword);
-
-    setLoading(false);
-
-    if (reply.message === 'Password updated!') {
-      setPasswordChanged(true);
-    } else {
-      setPasswordChangedError(true);
-    }
-    
+    dispatch(passwordChange(user, currentPassword, newPassword));
   }
 
   const currentPasswordHandler = (e) => {
@@ -86,13 +72,13 @@ const Profile = ({ history }) => {
           variant={'danger'}
         ></Alert>}
 
-      {passwordChanged && 
+      {message && 
         <Alert 
           message={'Password updated!'} 
           variant={'success'}
         ></Alert>}  
 
-      {passwordChangedError && 
+      {error && 
         <Alert 
           message={'Password update error!'} 
           variant={'danger'}

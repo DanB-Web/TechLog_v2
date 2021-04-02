@@ -4,7 +4,7 @@ const router = express.Router();
 
 import { createUser, authUser, changePassword } from './controllers/userControllers.js'
 
-import { createReport, editReport, addComment } from './controllers/reportsControllers.js';
+import { createReport, editReport, addComment, deleteReport } from './controllers/reportsControllers.js';
 import { createCompany } from './controllers/companyControllers.js';
 import { addImage, removeImage } from './controllers/imageControllers.js'
 
@@ -20,6 +20,7 @@ router.post('/password', changePassword);
 //REPORT ROUTES
 router.post('/report', createReport);
 router.put('/report', editReport);
+router.delete('/report', deleteReport);
 
 //COMPANY ROUTES
 router.post('/company', createCompany);

@@ -7,7 +7,11 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT,
   CLEAR_REPORTS_STATE,
-  CLEAR_COMPANY_STATE
+  CLEAR_COMPANY_STATE,
+  USER_PASSWORD_REQUEST,
+  USER_PASSWORD_SUCCESS,
+  USER_PASSWORD_FAILURE,
+  USER_PASSWORD_LOGOUT
 } from '../constants.js';
 
 export const login = (email, password) => async (dispatch) => {
@@ -48,4 +52,35 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT});
   dispatch({ type: CLEAR_REPORTS_STATE});
   dispatch({ type: CLEAR_COMPANY_STATE});
+  dispatch({ type: USER_PASSWORD_LOGOUT});
+}
+
+export const passwordChange = (userId, password, newPassword) => async (dispatch) => {
+
+  try {
+
+    dispatch({
+      type: USER_PASSWORD_REQUEST
+    });
+
+    const config = {
+      headers: {
+        'Content-Type':'application/json'
+      }
+    }
+
+    const { data } = await axios.post(`${BACKEND_URL}/password`, {userId, password, newPassword}, config);
+
+    dispatch({
+      type: USER_PASSWORD_SUCCESS,
+      payload: data
+    });
+
+  } catch (err) {
+
+    dispatch({
+      type: USER_PASSWORD_FAILURE,
+      payload: err.response
+    })
+  }
 }

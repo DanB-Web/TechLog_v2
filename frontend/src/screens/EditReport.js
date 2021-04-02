@@ -7,7 +7,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { BeatLoader } from 'react-spinners';
 import Switch from 'react-switch';
 
-import { editReport } from '../utils/rest';
+import { editReport, deleteReport } from '../utils/rest';
 
 import Images from '../components/Images';
 import ReportComment from '../components/ReportComment';
@@ -25,8 +25,6 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
   //EXTRACT VALUES FROM REPORT TO EDIT
   const { id, title, user, tags, shortDesc, longDesc, steps, images, comments, approved, approvedBy } = reportDetails;
-
-  const { name, email } = user;
 
   //PREPOPULATE FORM
   const [editTitle, setEditTitle] = useState(title);
@@ -50,7 +48,11 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  useEffect(() => {
+  //DELETED STATE
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [reportDeleted, setReportDeleted] = useState(false);
+
+  useEffect(() => {         //???
   }, [newTag]);
 
   //FORM SUBMISSION HANDLER
@@ -143,6 +145,19 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
     }
   }
 
+  //DELETE REPORT HANDLER
+ const setShowConfirmDeleteHandler = (e) => {
+  e.preventDefault();
+  setShowConfirmDelete(!showConfirmDelete);
+ }
+
+ const reportDeleteHandler = async (e) => {
+  e.preventDefault();
+  const reply = await deleteReport(id, images);
+  console.log(reply);
+  //setReportDeleted(true);
+ }
+
   if (submitted) {
     return  <div className="beat-loader">
             <BeatLoader size={40} color={'#C0C0C0'}/>
@@ -168,6 +183,23 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
             ></Alert> 
   }
 
+  if (reportDeleted) {
+    return <>
+      <p>Report deleted</p>
+      <Link to="/search">
+        <button>Back to search</button>
+      </Link>
+    </>
+  }
+
+  if (showConfirmDelete) {
+    return <>
+      <p>Are you sure you want to delete {title}?</p>
+      <button onClick={setShowConfirmDeleteHandler}>BACK</button>
+      <button onClick={reportDeleteHandler}>CONFIRM</button>
+    </>
+  }
+
   return (
     <div className="edit-report-container">
 
@@ -182,10 +214,10 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
          ></input>
 
         <label>Author</label>
-        <p>{name}</p>
+        <p>{user.name}</p>
 
         <label>Contact</label>
-        <p>{email}</p>
+        <p>{user.email}</p>
 
         <label>SearchTags</label>
         <ul className="edit-report-searchtags">
@@ -251,10 +283,13 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
         <label>
           <span>Report Approved:</span>
           <Switch onChange={approvedHandler} checked={reportApproved} />
-          <span>{reportApproved && <p>{reportApprovedUser.name}</p>}</span>
+          <span>{reportApprovedUser && <p>{reportApprovedUser.name}</p>}</span>
         </label>
 
         <button type="submit">SUBMIT</button>
+
+        <button onClick={setShowConfirmDeleteHandler}>DELETE</button>
+
         <label>Comments</label>
         <ul className="edit-report-comments">
           {editComments.map((comment, index) => {
