@@ -4,10 +4,11 @@ import { Company } from '../models/companyModel.js';
 import { generateToken } from '../utils/generateToken.js';
 
 const createUser = async (req, res) => {
+  
   try {
     const { name, email, password, company } = req.body;
-    const update = await User.create( { name, email, password, company } );
-    res.status(201).send(update);
+    const newUser = await User.create( { name, email, password, company } );
+    res.status(201).send(newUser);  //SHOULDN'T SEND PW
   } catch (err) {
     console.log(`CREATE USER ERROR: ${err}`.bold.red);
     res.status(500).json('CREATE USER ERROR');  
@@ -15,6 +16,7 @@ const createUser = async (req, res) => {
 }
 
 const authUser = async (req, res) => {
+  
   try {
 
     const { email, password } = req.body;
@@ -38,6 +40,7 @@ const authUser = async (req, res) => {
     } else {
       res.status(401).json({message: 'Username or password invalid!'});
     }
+
   } catch (err) {
       console.log(err);
       res.status(401);

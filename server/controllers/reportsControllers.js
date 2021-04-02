@@ -40,6 +40,18 @@ const editReport = async (req, res) => {
   }
 }
 
+const deleteReport = async (req, res) => {
+  try {
+    const reportId = req.body.id;
+    const images = req.body.imageUrls;
+    console.log(images);
+    res.status(200).send();
+  } catch (err) {
+    console.log(`DELETE REPORT ERROR: ${err}`.bold.red);
+    res.status(500).json('DELETE REPORT ERROR');
+  }
+}
+
 const addComment = async (req, res) => {
   try {
     const {reportId, user, comment } = req.body;
@@ -60,4 +72,4 @@ const addComment = async (req, res) => {
   }
 }
 
-export { createReport, editReport, addComment };
+export { createReport, editReport, deleteReport, addComment };
