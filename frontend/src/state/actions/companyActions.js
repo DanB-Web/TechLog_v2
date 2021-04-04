@@ -1,10 +1,14 @@
-import { getCompanyDetails } from '../../utils/graphql';
+import { getCompanyDetails, getCompanyUsers } from '../../utils/graphql';
 import { changeScheme } from '../../utils/helpers';
 
 import {
   FETCH_COMPANY_REQUEST,
   FETCH_COMPANY_SUCCESS,
-  FETCH_COMPANY_FAILURE
+  FETCH_COMPANY_FAILURE,
+  FETCH_COMPANY_USER_REQUEST,
+  FETCH_COMPANY_USER_SUCCESS,
+  FETCH_COMPANY_USER_FAILURE,
+
 } from '../constants.js';
 
 export const fetchCompany = () => async (dispatch, getState) => {
@@ -33,6 +37,30 @@ export const fetchCompany = () => async (dispatch, getState) => {
   } catch (err) {
     dispatch({
       type: FETCH_COMPANY_FAILURE,
+      payload: err.response
+    });
+  }
+}
+
+export const fetchCompanyUsers = () => async (dispatch, getState) => {
+  try {
+
+    dispatch({
+      type: FETCH_COMPANY_USER_REQUEST
+    });
+
+    const companyId = getState().userLogin.userInfo.company;
+
+    const result = await getCompanyUsers(companyId);
+
+    dispatch({
+      type: FETCH_COMPANY_USER_SUCCESS,
+      payload: result
+    });
+
+  } catch (err) {
+    dispatch({
+      type: FETCH_COMPANY_USER_FAILURE,
       payload: err.response
     });
   }

@@ -65,6 +65,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
       shortDesc: editShortDesc,
       longDesc: editLongDesc,
       steps: editSteps,
+      images: editImages,
       comments: editComments,
       approved: reportApproved,
       approvedBy: reportApprovedUser,
@@ -214,10 +215,10 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
          ></input>
 
         <label>Author</label>
-        <p>{user.name}</p>
+        <p>{user && user.name}</p>
 
         <label>Contact</label>
-        <p>{user.email}</p>
+        <p>{user && user.email}</p>
 
         <label>SearchTags</label>
         <ul className="edit-report-searchtags">

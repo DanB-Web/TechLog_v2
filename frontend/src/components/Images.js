@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { addImage, removeImage } from '../utils/rest';
 
 import Alert from './Alert';
@@ -11,6 +13,8 @@ const Images = ({ reportImages, setReportImages }) => {
   const [fileInputState, setFileInputState] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
 
+  const company = useSelector((state) => state.company.company.name)
+
   const sendImageHandler= (e) => {
     e.preventDefault();
     
@@ -21,7 +25,7 @@ const Images = ({ reportImages, setReportImages }) => {
     reader.readAsDataURL(selectedFile);
 
     reader.onloadend = async () => {
-     const result = await addImage(reader.result);
+     const result = await addImage(reader.result, company);
      addToImageArray(result);
      setFileInputState('');
      setSelectedFile('');
