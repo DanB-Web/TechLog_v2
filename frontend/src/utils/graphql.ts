@@ -77,3 +77,20 @@ export async function getReports(id: any) {
   const data = await graphqlRequest(query, {id:id});
   return data;
 }
+
+export async function getCompanyUsers (id: any) {
+  const query = `
+    query ($id:ID!){
+      companyDetails(id:$id) {
+        users {
+          id
+          name
+          email
+          isAdmin
+        }
+      }
+    }
+  `;
+  const data = await graphqlRequest(query, {id:id});
+  return data;
+}

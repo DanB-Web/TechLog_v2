@@ -4,13 +4,14 @@ import thunk from 'redux-thunk';
 //IMPORT REDUCERS
 import { userLoginReducer, passwordChangeReducer } from './reducers/userReducers.js';
 import { fetchReportsReducer } from './reducers/reportsReducers.js';
-import { fetchCompanyReducer } from './reducers/companyReducers.js';
+import { fetchCompanyReducer, fetchCompanyUserReducer } from './reducers/companyReducers.js';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducer = combineReducers({
   userLogin : userLoginReducer,
   company: fetchCompanyReducer,
+  companyUsers: fetchCompanyUserReducer,
   reports : fetchReportsReducer,
   passwordChange: passwordChangeReducer
 });

@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary';
-import { Report } from '../models/reportModel.js';
 
+//MOVE TO SEPERATE FILE AND IMPORT
 cloudinary.v2.config({
   cloud_name: "dasb94yfb",
   api_key: "281265939685491",
@@ -11,10 +11,13 @@ const addImage = async (req, res) => {
 
   try {
 
-    const file = req.body.data;
+    // const file = req.body.data;
+    // const company = req.body.company;
+
+    const { file, company } = req.body;
 
     const reply = await cloudinary.v2.uploader.upload(file, {
-      upload_preset: 'ReachSubsea'
+      upload_preset: `${company}`
     });
 
     const {asset_id, public_id, url} = reply;
@@ -35,14 +38,13 @@ const addImage = async (req, res) => {
 }
 
 const removeImage = async (req, res) => {
+  
   try {
+
     const imageId = req.body.data;
 
     //REMOVE IMAGE FROM CLOUDINARY
     const cloudinaryReply = await cloudinary.v2.uploader.destroy(imageId);
-
-    //REMOVE IMAGE FROM REPORT DB
-    await 
 
     res.send(cloudinaryReply);
 

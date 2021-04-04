@@ -20,6 +20,8 @@ export const submitReport = async (newReport) => {
 //EDIT EXISTING REPORT
 export const editReport = async (editedReport) => {
   
+  console.log(editedReport);
+
   const config = {
     headers: {
       'Content-Type':'application/json'
@@ -61,13 +63,13 @@ export const addComment = async (reportId, comment, user) => {
 
 }
 
-export const addImage = async (imageInfo) => {
+export const addImage = async (imageInfo, company) => {
 
   let reply;
   
   await fetch(`${BACKEND_URL}/image`, {
     method: 'POST',
-    body: JSON.stringify({ data: imageInfo }),
+    body: JSON.stringify({ file: imageInfo, company: company }),
     headers: { 'Content-Type': 'application/json' },
   }).then(res => res.json())
     .then(data => reply = data)

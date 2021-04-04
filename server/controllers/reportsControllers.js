@@ -1,4 +1,12 @@
+import cloudinary from 'cloudinary';
+
 import { Report } from '../models/reportModel.js';
+
+cloudinary.v2.config({
+  cloud_name: "dasb94yfb",
+  api_key: "281265939685491",
+  api_secret: "3o36L3BCbF4V_vGz_u0unnERlFo"
+})
 
 const createReport = async (req, res) => {
   try {
@@ -17,7 +25,7 @@ const createReport = async (req, res) => {
 const editReport = async (req, res) => {
 
   try {
-    const { id, title, tags, shortDesc, longDesc, steps, comments, approved, approvedBy } = req.body.editedReport;
+    const { id, title, tags, shortDesc, longDesc, steps, images, comments, approved, approvedBy } = req.body.editedReport;
 
     const report = await Report.findById(id);
 
@@ -26,6 +34,7 @@ const editReport = async (req, res) => {
     report.shortDesc = shortDesc;
     report.longDesc = longDesc;
     report.steps = steps;
+    report.images = images;
     report.comments = comments;
     report.approved = approved;
     report.approvedBy = approvedBy;
@@ -44,8 +53,25 @@ const deleteReport = async (req, res) => {
   try {
     const reportId = req.body.id;
     const images = req.body.imageUrls;
-    console.log(images);
-    res.status(200).send();
+
+    //CHECK FOR IMAGES AND DELETE FROM CLOUDINARY
+    if (images.length > 0) {
+
+      const deleteIds = [];
+
+      images.forEach(image => deleteIds.push(image.publicId));
+
+      const cloudinaryReply = await cloudinary.v2.api.delete_resources(deleteIds);
+
+      console.log(cloudinaryReply);
+
+    }
+
+    //DELETE REPORT FROM DB
+    const databaseReply = await Report.findByIdAndDelete(reportId);
+
+    console.log(databaseReply);
+    res.status(200).send(databaseReply);
   } catch (err) {
     console.log(`DELETE REPORT ERROR: ${err}`.bold.red);
     res.status(500).json('DELETE REPORT ERROR');
