@@ -76,6 +76,18 @@ const changePassword = async (req, res) => {
   }
 }
 
+const resetPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    console.log(email);
+    res.status(200).json({message: 'Password reset!'});
+  } catch (err) {
+      console.log(err);
+      res.status(401);
+      throw new Error('Reset password error!')
+  }
+}
+
 const deleteUsers = async (req, res) => {
   
   try {
@@ -91,4 +103,4 @@ const deleteUsers = async (req, res) => {
   }
 }
 
-export { createUser, authUser, changePassword, deleteUsers };
+export { createUser, authUser, changePassword, resetPassword, deleteUsers };

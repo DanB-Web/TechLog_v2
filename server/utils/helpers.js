@@ -16,4 +16,6 @@ const generatePassword = (passwordLength) => {
   return newPassword.join('');
 }
 
-export { generatePassword };
+export const sendEmail = () => {
+  
+}

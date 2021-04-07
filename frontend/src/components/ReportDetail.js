@@ -57,8 +57,6 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
     }  
   }
 
-  console.log(reportDetails);
-
   return (
     <div className="report-details" style={{animation: 'slideUp 1s forwards'}}>
 

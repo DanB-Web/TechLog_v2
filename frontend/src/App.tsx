@@ -10,6 +10,7 @@ import Navbar from './components/NavBar';
 import Backdrop from './components/Backdrop';
 
 import Login from './screens/Login';
+import NewPassword from './screens/NewPassword'
 import SearchReports from './screens/SearchReports';
 import NewReport from './screens/NewReport';
 import EditReport from './screens/EditReport';
@@ -78,6 +79,7 @@ const App = () => {
           ></Navbar>
         <Switch>
           <Route path="/" exact component={Login}></Route>
+          <Route path="/newpassword" exact component={NewPassword}></Route>
           <Route path="/search" 
                  render={props => <SearchReports {...props} 
                  setViewReport={setViewReport} 
