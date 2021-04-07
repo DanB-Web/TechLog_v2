@@ -6,9 +6,10 @@ import { generateToken } from '../utils/generateToken.js';
 const createUser = async (req, res) => {
   
   try {
-    const { name, email, password, company } = req.body;
-    const newUser = await User.create( { name, email, password, company } );
-    res.status(201).send(newUser);  //SHOULDN'T SEND PW
+    const { name, email, isAdmin, company } = req.body;
+    const password = '123456'; //SEND PW VIA EMAIL
+    const newUser = await User.create( { name, email, company, isAdmin, password } );
+    res.status(201).send('ACCOUNT CREATED');  
   } catch (err) {
     console.log(`CREATE USER ERROR: ${err}`.bold.red);
     res.status(500).json('CREATE USER ERROR');  
@@ -75,4 +76,19 @@ const changePassword = async (req, res) => {
   }
 }
 
-export { createUser, authUser, changePassword };
+const deleteUsers = async (req, res) => {
+  
+  try {
+    let { ids } = req.body;
+    ids = JSON.parse(ids);
+    //DELETE BY MULTIPLE ID'S
+    await User.deleteMany({_id: { $in: ids}});
+    res.status(200).send();
+  } catch (err) {
+      console.log(err);
+      res.status(401);
+      throw new Error('Delete users error!')
+  }
+}
+
+export { createUser, authUser, changePassword, deleteUsers };

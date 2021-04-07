@@ -19,8 +19,6 @@ export const submitReport = async (newReport) => {
 
 //EDIT EXISTING REPORT
 export const editReport = async (editedReport) => {
-  
-  console.log(editedReport);
 
   const config = {
     headers: {
@@ -35,7 +33,6 @@ export const editReport = async (editedReport) => {
 
 export const deleteReport = async (reportId, images) => {
 
-  console.log(images);
   const config = {
     headers: {
       'Content-Type':'application/json'
@@ -91,5 +88,33 @@ export const removeImage = async (imageId) => {
     .catch(err => console.log('IMAGE DELETE FETCH ERROR', err));
 
     return reply;
+}
+
+export const addUser = async (name, email, isAdmin, company) => {
+
+const config = {
+    headers: {
+      'Content-Type':'application/json'
+    }
+  }
+
+  const reply = await axios.post(`${BACKEND_URL}/user`, {name, email, isAdmin, company}, config);
+
+  return reply;
+}
+
+export const deleteUsers = async (ids) => {
+
+const data = JSON.stringify(ids);
+
+const config = {
+    headers: {
+      'Content-Type':'application/json'
+    }
+  }
+
+  const reply = await axios.delete(`${BACKEND_URL}/user`, {data: {ids: data}}, config);
+
+  return reply;
 }
 

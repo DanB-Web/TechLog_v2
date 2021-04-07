@@ -222,7 +222,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
         <label>SearchTags</label>
         <ul className="edit-report-searchtags">
-          {editTags.map((tag, index) => {
+          {editTags && editTags.map((tag, index) => {
             return <li key={index}># {tag} <button onClick={removeTagHandler}>X</button></li>
           })}
         </ul>
