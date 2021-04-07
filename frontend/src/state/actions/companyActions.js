@@ -53,9 +53,11 @@ export const fetchCompanyUsers = () => async (dispatch, getState) => {
 
     const result = await getCompanyUsers(companyId);
 
+    const users = result.companyDetails.users;
+
     dispatch({
       type: FETCH_COMPANY_USER_SUCCESS,
-      payload: result
+      payload: users
     });
 
   } catch (err) {
