@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 //IMPORT REDUCERS
-import { userLoginReducer, passwordChangeReducer } from './reducers/userReducers.js';
+import { userLoginReducer, passwordChangeReducer, passwordResetReducer } from './reducers/userReducers.js';
 import { fetchReportsReducer } from './reducers/reportsReducers.js';
 import { fetchCompanyReducer, fetchCompanyUserReducer } from './reducers/companyReducers.js';
 
@@ -13,7 +13,8 @@ const reducer = combineReducers({
   company: fetchCompanyReducer,
   companyUsers: fetchCompanyUserReducer,
   reports : fetchReportsReducer,
-  passwordChange: passwordChangeReducer
+  passwordChange: passwordChangeReducer,
+  passwordReset: passwordResetReducer
 });
 
 //LOCAL STORAGE FOR LOGGED IN USER

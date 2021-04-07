@@ -11,7 +11,10 @@ import {
   USER_PASSWORD_REQUEST,
   USER_PASSWORD_SUCCESS,
   USER_PASSWORD_FAILURE,
-  USER_PASSWORD_LOGOUT
+  USER_PASSWORD_LOGOUT,
+  USER_PASSWORD_RESET_REQUEST,
+  USER_PASSWORD_RESET_SUCCESS,
+  USER_PASSWORD_RESET_FAILURE
 } from '../constants.js';
 
 export const login = (email, password) => async (dispatch) => {
@@ -80,6 +83,36 @@ export const passwordChange = (userId, password, newPassword) => async (dispatch
 
     dispatch({
       type: USER_PASSWORD_FAILURE,
+      payload: err.response
+    })
+  }
+}
+
+export const passwordReset = (email) => async (dispatch) => {
+
+  try {
+
+    dispatch({
+      type: USER_PASSWORD_RESET_REQUEST
+    });
+
+    const config = {
+      headers: {
+        'Content-Type':'application/json'
+      }
+    }
+
+    const { data } = await axios.put(`${BACKEND_URL}/password`, {email}, config);
+
+    dispatch({
+      type: USER_PASSWORD_RESET_SUCCESS,
+      payload: data
+    });
+
+  } catch (err) {
+
+    dispatch({
+      type: USER_PASSWORD_RESET_FAILURE,
       payload: err.response
     })
   }

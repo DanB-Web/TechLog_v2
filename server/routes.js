@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import { createUser, deleteUsers, authUser, changePassword } from './controllers/userControllers.js'
+import { createUser, deleteUsers, authUser, changePassword, resetPassword } from './controllers/userControllers.js'
 
 import { createReport, editReport, addComment, deleteReport } from './controllers/reportsControllers.js';
 import { createCompany } from './controllers/companyControllers.js';
@@ -17,6 +17,7 @@ router.post('/login', authUser)
 router.post('/user', createUser);
 router.delete('/user', deleteUsers);
 router.post('/password', changePassword);
+router.put('/password', resetPassword);
 
 //REPORT ROUTES
 router.post('/report', createReport);

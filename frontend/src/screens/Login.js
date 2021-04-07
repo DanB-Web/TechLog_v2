@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../state/actions/userActions';
@@ -44,6 +45,7 @@ const Login = ({history}) => {
         <label>Password:</label>
         <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
         <button type="submit">Log in!</button>
+        <Link to="/newpassword">Forgot password?</Link>
         {error && <Alert message={error.data.message}/>}
       </form>
     }
