@@ -3,10 +3,10 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
-  USER_PASSWORD_REQUEST,
-  USER_PASSWORD_SUCCESS,
-  USER_PASSWORD_FAILURE,
-  USER_PASSWORD_LOGOUT,
+  USER_PASSWORD_CHANGE_REQUEST,
+  USER_PASSWORD_CHANGE_SUCCESS,
+  USER_PASSWORD_CHANGE_FAILURE,
+  USER_PASSWORD_CHANGE_LOGOUT,
   USER_PASSWORD_RESET_REQUEST,
   USER_PASSWORD_RESET_SUCCESS,
   USER_PASSWORD_RESET_FAILURE
@@ -29,13 +29,13 @@ export const userLoginReducer = (state = {}, action) => {
 
 export const passwordChangeReducer = (state = {}, action) => {
   switch (action.type) {
-    case USER_PASSWORD_REQUEST:
+    case USER_PASSWORD_CHANGE_REQUEST:
       return {loading: true }
-    case USER_PASSWORD_SUCCESS:
+    case USER_PASSWORD_CHANGE_SUCCESS:
       return {loading: false, message: action.payload}
-    case USER_PASSWORD_FAILURE:
+    case USER_PASSWORD_CHANGE_FAILURE:
       return {loading: false, error: action.payload}
-    case USER_PASSWORD_LOGOUT:
+    case USER_PASSWORD_CHANGE_LOGOUT:
       return {}
     default:
       return state;
