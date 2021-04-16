@@ -1,18 +1,30 @@
 import { User } from '../models/userModel.js';
-import { Company } from '../models/companyModel.js';
 
 import { generateToken } from '../utils/generateToken.js';
+import { sendMail } from '../utils/email.js';
+import { generatePassword } from '../utils/helpers.js';
 
 const createUser = async (req, res) => {
   
   try {
     const { name, email, isAdmin, company } = req.body;
-    const password = '123456'; //SEND PW VIA EMAIL
-    const newUser = await User.create( { name, email, company, isAdmin, password } );
-    res.status(201).send('ACCOUNT CREATED');  
+    
+    //CHECK FOR EXISTING USER
+    const user = await User.findOne({email});
+    
+    if (user) {
+      res.status(409).json({message: 'Account already exists!'}); //409: ALREADY EXISTS
+    } else {
+    //OTHERWISE CREATE NEW USER + SEND REG EMAIL
+    const password = generatePassword(6);
+    await User.create( { name, email, company, isAdmin, password } );
+    await sendMail(email, 'newUser', password)
+    res.status(201).json({message: 'Account created!'}); 
+    }
+
   } catch (err) {
     console.log(`CREATE USER ERROR: ${err}`.bold.red);
-    res.status(500).json('CREATE USER ERROR');  
+    res.status(500).json({message: 'Create user error'});  
   } 
 }
 
@@ -79,7 +91,7 @@ const changePassword = async (req, res) => {
 const resetPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log(email);
+    sendMail(email, 'passwordReset');
     res.status(200).json({message: 'Password reset!'});
   } catch (err) {
       console.log(err);

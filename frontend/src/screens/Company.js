@@ -29,13 +29,15 @@ const Company = ({ history }) => {
   const [submitUser, setSubmitUser] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = useState('Add user error...');
 
   //DELETE USERS STATE
   const [deleteUsers, setDeleteUsers] = useState([]);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const [deleteError, setDeleteError] = useState(false);
+  const [deleteErrorMessage, setDeleteErrorMessage] = useState('Delete user error...');
 
-  useEffect(()=>{
+  useEffect(()=> {
     dispatch(fetchCompanyUsers());
   },[dispatch, deleteSuccess, submitSuccess])
 
@@ -50,6 +52,7 @@ const Company = ({ history }) => {
       setUserEmail('');
       setUserAdmin(false);
     } else {
+      setSubmitErrorMessage(reply.data.message);
       setSubmitError(true);
     }
   }
@@ -112,7 +115,7 @@ const Company = ({ history }) => {
         { submitSuccess ? 
           <Alert message={'New user added!'} variant={'success'}></Alert> :
           submitError ? 
-          <Alert message={'User add error...'} variant={'danger'}></Alert> :
+          <Alert message={submitErrorMessage} variant={'danger'}></Alert> :
           null 
           }
       </div>
@@ -131,7 +134,7 @@ const Company = ({ history }) => {
           {deleteSuccess ? 
             <Alert message={'Users deleted!'} variant={'success'}></Alert> :
            deleteError ? 
-            <Alert message={'User delete error...'} variant={'danger'}></Alert> :
+            <Alert message={deleteErrorMessage} variant={'danger'}></Alert> :
            null 
             }
         </div>
