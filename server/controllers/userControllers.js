@@ -63,8 +63,12 @@ const authUser = async (req, res) => {
 
 const changePassword = async (req, res) => {
 
+  console.log('called');
+
   try {
     const {userId, password, newPassword} = req.body;
+
+    console.log(userId, password, newPassword);
 
     let passwordCheck = false;
     const user = await User.findById(userId);
@@ -107,7 +111,7 @@ const deleteUsers = async (req, res) => {
     ids = JSON.parse(ids);
     //DELETE BY MULTIPLE ID'S
     await User.deleteMany({_id: { $in: ids}});
-    res.status(200).send();
+    res.status(200).json({message: 'Users deleted!'});
   } catch (err) {
       console.log(err);
       res.status(401);

@@ -1,7 +1,8 @@
-import React, {useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { passwordChange } from '../state/actions/userActions';
+import { USER_PASSWORD_CHANGE_CLEAR } from '../state/constants';
 
 import { BeatLoader } from 'react-spinners';
 
@@ -20,31 +21,27 @@ const Profile = ({ history }) => {
   const passwordChangeState = useSelector((state) => state.passwordChange);
   const { loading, message, error } = passwordChangeState;
 
+  //FORM STATE
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const [passwordMismatch, setPasswordMismatch] = useState(false);
 
+  //CLEAR PASSWORD ALERTS ON PAGE LOAD
+  useEffect(() => {
+    dispatch({type: USER_PASSWORD_CHANGE_CLEAR})
+  }, [dispatch])
+
+  //CHECK PW ARE DIFFERENT
   const changePasswordHandler = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
       setPasswordMismatch(true);
       return;
     }
+    setPasswordMismatch(false);
     dispatch(passwordChange(user, currentPassword, newPassword));
-  }
-
-  const currentPasswordHandler = (e) => {
-    setCurrentPassword(e.target.value);
-  }
-
-  const newPasswordHandler = (e) => {
-    setNewPassword(e.target.value);
-  }
-
-  const confirmNewPasswordHandler = (e) => {
-    setConfirmNewPassword(e.target.value);
   }
 
   if (loading) {
@@ -58,11 +55,11 @@ const Profile = ({ history }) => {
       <h2>Change Password</h2>
       <form onSubmit={changePasswordHandler}>
         <label>Current password</label>
-        <input value={currentPassword} onChange={currentPasswordHandler} type="password" required></input>
+        <input value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} type="password" required></input>
         <label>New password</label>
-        <input value={newPassword} onChange={newPasswordHandler} type="password" required></input>
+        <input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="password" required></input>
         <label>Confirm new password</label>
-        <input value={confirmNewPassword} onChange={confirmNewPasswordHandler} type="password" required></input>
+        <input value={confirmNewPassword} onChange={e => setConfirmNewPassword(e.target.value)} type="password" required></input>
         <button type="submit">Change password</button>
       </form>
 

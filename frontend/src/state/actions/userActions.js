@@ -12,7 +12,7 @@ import {
   USER_PASSWORD_CHANGE_REQUEST,
   USER_PASSWORD_CHANGE_SUCCESS,
   USER_PASSWORD_CHANGE_FAILURE,
-  USER_PASSWORD_CHANGE_LOGOUT,
+  USER_PASSWORD_CHANGE_CLEAR,
   USER_PASSWORD_RESET_REQUEST,
   USER_PASSWORD_RESET_SUCCESS,
   USER_PASSWORD_RESET_FAILURE
@@ -27,7 +27,7 @@ const configNoToken = {
 const configToken = {
   headers: {
     'Content-Type':'application/json',
-    'Authorization' : `${getToken()}`
+    'Authorization' : `Bearer ${getToken()}`
   }
 }
 
@@ -63,7 +63,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT});
   dispatch({ type: CLEAR_REPORTS_STATE});
   dispatch({ type: CLEAR_COMPANY_STATE});
-  dispatch({ type: USER_PASSWORD_CHANGE_LOGOUT});
+  dispatch({ type: USER_PASSWORD_CHANGE_CLEAR});
 }
 
 export const passwordChange = (userId, password, newPassword) => async (dispatch) => {

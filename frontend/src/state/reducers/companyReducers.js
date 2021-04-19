@@ -6,7 +6,7 @@ import {
   FETCH_COMPANY_USER_REQUEST,
   FETCH_COMPANY_USER_SUCCESS,
   FETCH_COMPANY_USER_FAILURE,
-  CLEAR_COMPANY_USER_STATE
+  CLEAR_COMPANY_USER_STATE,
 } from '../constants.js';
 
 export const fetchCompanyReducer = (state = {name: null}, action) => {

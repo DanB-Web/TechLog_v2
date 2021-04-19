@@ -22,7 +22,6 @@ const Drawer = ({toggleDrawer, logout}) => {
       <div className="drawer-links">
         <Link to='/search' onClick={toggleDrawer}>Search Reports</Link>
         <Link to='/newreport' onClick={toggleDrawer}>New Report</Link>
-        {isAdmin ? <Link to='/editreport' onClick={toggleDrawer}>Edit Report</Link> : null}
         {isAdmin ? <Link to='/company' onClick={toggleDrawer}>My Company</Link> : null}
         <Link to='/profile' onClick={toggleDrawer}>My Profile</Link>
         <Link to='/login' onClick={logoutHandler}>Logout</Link>
