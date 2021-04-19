@@ -1,17 +1,12 @@
 import nodemailer from 'nodemailer';
 
-export const sendMail = (emailTo, type, password) => {
+export const sendMail = async (emailTo, type, password) => {
 
-  //CANNOT ACCESS .ENV OUTSIDE FUNCTION?
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'SendGrid',
     auth: {
-      type: 'OAuth2',
-      user: process.env.EMAIL_CLIENT_USER,
-      pass: process.env.EMAIL_CLIENT_PASSWORD,
-      clientId: process.env.EMAIL_CLIENT_ID,
-      clientSecret: process.env.EMAIL_CLIENT_SECRET,
-      refreshToken: process.env.EMAIL_CLIENT_REFRESH,
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false
@@ -41,11 +36,12 @@ export const sendMail = (emailTo, type, password) => {
     `
   }
 
-  transporter.sendMail(mailOptions, function(error, info){
+  await transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      console.log(error);
+      console.log('NODEMAILER ERROR:', error);
     } else {
       console.log('Email sent: ' + info.response);
     }
+    transporter.close();
   }); 
 } 

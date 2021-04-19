@@ -10,11 +10,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducer = combineReducers({
   userLogin : userLoginReducer,
+  passwordChange: passwordChangeReducer,
+  passwordReset: passwordResetReducer,
   company: fetchCompanyReducer,
   companyUsers: fetchCompanyUserReducer,
   reports : fetchReportsReducer,
-  passwordChange: passwordChangeReducer,
-  passwordReset: passwordResetReducer
 });
 
 //LOCAL STORAGE FOR LOGGED IN USER

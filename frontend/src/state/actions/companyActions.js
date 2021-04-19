@@ -1,4 +1,5 @@
 import { getCompanyDetails, getCompanyUsers } from '../../utils/graphql';
+
 import { changeScheme } from '../../utils/helpers';
 
 import {
@@ -8,7 +9,6 @@ import {
   FETCH_COMPANY_USER_REQUEST,
   FETCH_COMPANY_USER_SUCCESS,
   FETCH_COMPANY_USER_FAILURE,
-
 } from '../constants.js';
 
 export const fetchCompany = () => async (dispatch, getState) => {
@@ -67,3 +67,4 @@ export const fetchCompanyUsers = () => async (dispatch, getState) => {
     });
   }
 }
+

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCompanyUsers } from '../state/actions/companyActions';
 
 import { BeatLoader } from 'react-spinners';
 
-import { addUser, deleteUsers as deleteUsersRest } from '../utils/rest.js';
+import { addUser as addUserRest, deleteUsers as deleteUsersRest } from '../utils/rest.js';
 
 import UserTile from '../components/UserTile.js';
 import Alert from '../components/Alert.js';
@@ -15,50 +15,89 @@ const Company = ({ history }) => {
   const auth = useSelector((state) => state.userLogin.loggedIn);
   !auth && history.push('/login');
 
-  const dispatch = useDispatch();
+  const initialState = {
+    username: '',
+    userEmail: '',
+    userAdmin: false,
+    submitLoading: false,
+    submitMessage: '',
+    submitError: '',
+    deleteLoading: false,
+    deleteMessage: '',
+    deleteError: '',
+  }
+
+  const pageReducer = (state, action) => {
+    switch (action.type) {
+      case 'USER_NAME' : 
+        return {...state, submitMessage: '', submitError: '', deleteMessage: '', deleteError: '', username: action.value}
+      case 'USER_EMAIL' :
+        return {...state, submitMessage: '', submitError: '', deleteMessage: '', deleteError: '', userEmail: action.value}
+      case 'USER_ADMIN' :
+        return {...state, submitMessage: '', submitError: '', deleteMessage: '', deleteError: '', userAdmin: action.value}
+      case 'SUBMIT_USER_REQUEST' :
+        return {...state, submitLoading: true}
+      case 'SUBMIT_USER_SUCCESS' : 
+        return {...state, submitLoading: false, submitMessage: action.value, username: '', userEmail: '', userAdmin: false}
+      case 'SUBMIT_USER_FAILURE' : 
+        return {...state, submitLoading: false, submitError: action.value}
+      case 'DELETE_USER_REQUEST' :
+        return {...state, deleteLoading: true}
+      case 'DELETE_USER_SUCCESS' : 
+        return {...state, deleteLoading: false, deleteMessage: action.value}
+      case 'DELETE_USER_FAILURE' : 
+        return {...state, deleteLoading: false, deleteError: action.value}
+      case 'CLEAR_MESSAGES' : 
+        return {...state, submitMessage: '', submitError: '', deleteMessage: '', deleteError: ''}
+      default:
+        return state;
+    } 
+  }
+
+  //NOTE YOU HAVE TO DIFFERENTIATE BETWEEN LOCAL AND GLOBAL REDUCER FOR DISPATCH TO WORK
+  const [pageState, dispatchReducer] = useReducer(pageReducer, initialState);
+  const dispatchRedux = useDispatch();
 
   const company = useSelector((state) => state.userLogin.userInfo.company)
   const { users, loading } = useSelector((state) => state.companyUsers);
 
-  //FORM STATE
-  const [username, setUsername] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userAdmin, setUserAdmin] = useState(false);
-
-  //NEW USER SUBMISSION STATE
-  const [submitUser, setSubmitUser] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
-  const [submitErrorMessage, setSubmitErrorMessage] = useState('Add user error...');
-
-  //DELETE USERS STATE
+  //ARRAY TO HOLD USERS TO DELETE
   const [deleteUsers, setDeleteUsers] = useState([]);
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
-  const [deleteError, setDeleteError] = useState(false);
-  const [deleteErrorMessage, setDeleteErrorMessage] = useState('Delete user error...');
 
   useEffect(()=> {
-    dispatch(fetchCompanyUsers());
-  },[dispatch, deleteSuccess, submitSuccess])
+    dispatchRedux(fetchCompanyUsers());
+  }, [dispatchRedux, pageState.submitLoading, pageState.deleteLoading])
 
-  const formSubmitHandler = async (e) => {
+  const newUserHandler = async (e) => {
     e.preventDefault();
-    setSubmitUser(true);
-    const reply = await addUser(username, userEmail, userAdmin, company);
-    setSubmitUser(false);
+    dispatchReducer({type: 'SUBMIT_USER_REQUEST'})
+    const { username, userEmail, userAdmin } = pageState;
+    const reply = await addUserRest(username, userEmail, userAdmin, company);
     if (reply.status === 201) {
-      setSubmitSuccess(true);
-      setUsername('');
-      setUserEmail('');
-      setUserAdmin(false);
+      dispatchReducer({type: 'SUBMIT_USER_SUCCESS', value: reply.data.message})
     } else {
-      setSubmitErrorMessage(reply.data.message);
-      setSubmitError(true);
+      dispatchReducer({type: 'SUBMIT_USER_FAILURE', value: reply.data.message})
+    }
+  }
+
+  const deleteUsersHandler = async () => {
+    if (deleteUsers.length > 0) {
+      dispatchReducer({type: 'CLEAR_MESSAGES'})
+      dispatchReducer({type: 'DELETE_USER_REQUEST'})
+      const reply = await deleteUsersRest(deleteUsers);
+      if (reply.status === 200) {
+        dispatchReducer({type: 'DELETE_USER_SUCCESS', value: reply.data.message})
+        setDeleteUsers([]);
+      } else {
+        dispatchReducer({type: 'DELETE_USER_FAILURE', value: reply.data.message})
+      }
     }
   }
 
   const adminToggleHandler = () => {
-    setUserAdmin(!userAdmin);
+    pageState.userAdmin 
+    ? dispatchReducer({type: 'USER_ADMIN', value: false}) 
+    : dispatchReducer({type: 'USER_ADMIN', value: true}) 
   }
 
   const checkboxHandler = (e, id) => {
@@ -74,37 +113,26 @@ const Company = ({ history }) => {
     }
   }
 
-  const deleteUsersHandler = async () => {
-    if (deleteUsers.length > 0) {
-      const reply = await deleteUsersRest(deleteUsers);
-      if (reply.status === 200) {
-        setDeleteSuccess(true);
-      } else {
-        setDeleteError(true);
-      }
-    }
-  }
-
   return (
     <div className="company-container">
 
       <div className="company-add-user"> 
-      {submitUser ? 
+      {pageState.submitLoading ? 
         <p>Uploading user...</p> :
-        <form className="add-company-user" onSubmit={(e) => formSubmitHandler(e)}>
+        <form className="add-company-user" onSubmit={(e) => newUserHandler(e)}>
           <label>New User Name</label>
           <input type="text" 
-                 value={username} 
-                 onChange={(e) => setUsername(e.target.value)} 
+                 value={pageState.username} 
+                 onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
                  required></input>
           <label>New User Email</label>
           <input type="email" 
-                 value={userEmail} 
-                 onChange={(e) => setUserEmail(e.target.value)} 
+                 value={pageState.userEmail} 
+                 onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
                  required></input>
           <label>Admin</label>
           <input type="checkbox" 
-                 checked={!!userAdmin}
+                 checked={pageState.userAdmin}
                  onChange={() => adminToggleHandler()}/>
           <button type="submit">Add User</button>
         </form>
@@ -112,10 +140,16 @@ const Company = ({ history }) => {
       </div>
 
       <div className="company-add-user-alerts">
-        { submitSuccess ? 
-          <Alert message={'New user added!'} variant={'success'}></Alert> :
-          submitError ? 
-          <Alert message={submitErrorMessage} variant={'danger'}></Alert> :
+        { pageState.submitMessage ? 
+          <Alert 
+            message={pageState.submitMessage} 
+            variant={'success'} 
+          ></Alert> :
+          pageState.submitError ? 
+          <Alert 
+            message={pageState.submitError} 
+            variant={'danger'} 
+          ></Alert> :
           null 
           }
       </div>
@@ -131,10 +165,10 @@ const Company = ({ history }) => {
         }
 
         <div className="company-delete-user-alerts">
-          {deleteSuccess ? 
-            <Alert message={'Users deleted!'} variant={'success'}></Alert> :
-           deleteError ? 
-            <Alert message={deleteErrorMessage} variant={'danger'}></Alert> :
+          {pageState.deleteMessage ? 
+            <Alert message={pageState.deleteMessage} variant={'success'}></Alert> :
+            pageState.deleteError ? 
+            <Alert message={pageState.deleteError} variant={'danger'}></Alert> :
            null 
             }
         </div>
