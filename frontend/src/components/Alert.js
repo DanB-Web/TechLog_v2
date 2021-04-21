@@ -1,14 +1,10 @@
 import React from 'react';
 
-import '../styles/Alert.scss'
+import '../styles/Components/Alert.scss'
 
 const Alert = ({message, variant}) => {
 
   let background, icon;
-
-  //<i class="far fa-check-circle"></i>
-  //<i class="far fa-times-circle"></i>
-  //<i class="far fa-question-circle"></i>
 
   if (variant === 'success') {
     background = 'var(--color-success)';

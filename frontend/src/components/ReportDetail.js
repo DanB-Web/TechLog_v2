@@ -9,7 +9,7 @@ import Alert from './Alert';
 
 import {addComment} from '../utils/rest';
 
-import '../styles/ReportDetails.scss';
+import '../styles/Components/ReportDetails.scss';
 
 const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
 
@@ -70,11 +70,11 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
       }
 
       <div className="report-title">
+          <div className="report-author">
+            <p>Report Author: {user.name}</p>
+            <p>Contact: {user.email}</p>
+          </div>
         <h2>{title}</h2>
-        <div className="report-author">
-          <p>Report Author: {user.name}</p>
-          <p>Contact: {user.email}</p>
-        </div>
       </div>
   
       <h4>Search Tags</h4>
@@ -144,6 +144,7 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
       <form className="submit-comment" onSubmit={addCommentHandler}>
         <textarea 
           value={newComment} 
+          placeholder="Add a comment..."
           onChange={(e)=>{setNewComment(e.target.value)}}
         />
         <button type="submit">ADD COMMENT</button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Moment from 'moment';
 
-import '../styles/ReportDetails.scss';
+import '../styles/Components/ReportDetails.scss';
 
 const ReportComment = ({comment}) => {
 

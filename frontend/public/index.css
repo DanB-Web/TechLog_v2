@@ -8,7 +8,7 @@ html {
   --color-warning: #fc9c12;
   --color-danger: #e74c3c;
   --color-tag: #3498db;
-  --color-tile: #dddddd;
+  --color-tile: #f2f2f2;
 }
 
 html[data-theme="dark"] {

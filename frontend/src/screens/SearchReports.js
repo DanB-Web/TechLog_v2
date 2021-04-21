@@ -10,7 +10,7 @@ import Alert from '../components/Alert';
 import SearchBar from '../components/SearchBar';
 import ReportTile from '../components/ReportTile';
 
-import '../styles/SearchReports.scss';
+import '../styles/Screens/SearchReports.scss';
 
 const SearchReports = ({ history, setViewReport, setReportDetails }) => {
 
@@ -32,7 +32,14 @@ const SearchReports = ({ history, setViewReport, setReportDetails }) => {
 
   //ADD AND REMOVE SEARCH TERMS
   const addSearchTerm = (term) => {
-    setSearchTerms([...searchTerms, term]);
+
+    if (term.charAt(0) === '#') {
+      term = term.slice(1);
+    }
+
+    if (searchTerms.includes(term)) return;
+
+    setSearchTerms([...searchTerms, term.toLowerCase()]);
   }
 
   const removeSearchTerm = (removedTerm) => {
@@ -74,16 +81,18 @@ const SearchReports = ({ history, setViewReport, setReportDetails }) => {
         <Alert>{error.message}</Alert> :
       reports ? 
         <>
+          {isAdmin && <label className="search-reports-unapproved-switch">
+            <Switch onChange={showApprovedHandler} checked={showUnapproved} />
+            <p>Show Unapproved</p>
+          </label>}
+
           <SearchBar 
             searchTerms={searchTerms}
             addSearchTerm={addSearchTerm}
             removeSearchTerm={removeSearchTerm}  
           />
 
-          {isAdmin && <label>
-          <span>Show Unapproved</span>
-          <Switch onChange={showApprovedHandler} checked={showUnapproved} />
-          </label>}
+          
           
           <div className="searchReports-tiles-container">
             {showUnapproved ? 

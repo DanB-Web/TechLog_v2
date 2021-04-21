@@ -44,7 +44,7 @@ const editReport = async (req, res) => {
     res.status(200).send(updatedReport);
 
   } catch (err) {
-    console.log(`EDIT REPORT COMMENT ERROR: ${err}`.bold.red);
+    console.log(`EDIT REPORT ERROR: ${err}`.bold.red);
     res.status(500).json('EDIT REPORT ERROR');
   }
 }
@@ -70,7 +70,6 @@ const deleteReport = async (req, res) => {
     //DELETE REPORT FROM DB
     const databaseReply = await Report.findByIdAndDelete(reportId);
 
-    console.log(databaseReply);
     res.status(200).send(databaseReply);
   } catch (err) {
     console.log(`DELETE REPORT ERROR: ${err}`.bold.red);

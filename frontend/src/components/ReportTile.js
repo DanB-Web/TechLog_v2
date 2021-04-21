@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/ReportTile.scss'
+import '../styles/Components/ReportTile.scss'
 
 const ReportTile = ({report, searchTerms, setViewReport, setReportDetails}) => {
 
@@ -24,14 +24,18 @@ const ReportTile = ({report, searchTerms, setViewReport, setReportDetails}) => {
 
   return (
     <div className="report-tile" style={{animation: 'fadeIn 1s forwards'}}>
+      <div className="report-tile-title">
       <h2>{report.title}</h2>
-      <ul>
-        {report.tags.map((tag, index) => {
-          return <li key={index}>#{tag}</li>
-        })}
-      </ul>
-      <p>{report.shortDesc}</p>
-      <button onClick={showReport}>More info</button>
+        <ul>
+          {report.tags.map((tag, index) => {
+            return <li key={index}>#{tag}</li>
+          })}
+        </ul>
+      </div>
+      <div className="report-tile-content">
+        <p>{report.shortDesc}</p>
+        <button onClick={showReport}>More info</button>
+      </div>
     </div>
   )
 }
