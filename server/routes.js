@@ -20,7 +20,7 @@ router.post('/login', authUser)
 router.post('/user', protect, createUser);
 router.delete('/user', protectBody, deleteUsers);
 router.post('/password', protect, changePassword);
-router.put('/password', protect, resetPassword);
+router.put('/password', resetPassword);
 
 //REPORT ROUTES
 router.post('/report', protect, createReport);

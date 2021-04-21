@@ -9,7 +9,8 @@ import {
   USER_PASSWORD_CHANGE_CLEAR,
   USER_PASSWORD_RESET_REQUEST,
   USER_PASSWORD_RESET_SUCCESS,
-  USER_PASSWORD_RESET_FAILURE
+  USER_PASSWORD_RESET_FAILURE,
+  USER_PASSWORD_RESET_CLEAR
 } from '../constants.js'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -50,6 +51,8 @@ export const passwordResetReducer = (state = {}, action) => {
       return {loading: false, message: action.payload}
     case USER_PASSWORD_RESET_FAILURE:
       return {loading: false, error: action.payload}
+    case USER_PASSWORD_RESET_CLEAR: 
+      return {}
     default:
       return state;
   }

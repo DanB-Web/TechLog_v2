@@ -9,7 +9,7 @@ import Alert from '../components/Alert';
 
 import { BeatLoader } from 'react-spinners';
 
-import '../styles/Login.scss';
+import '../styles/Screens/Login.scss';
 
 const Login = ({history}) => {
 
@@ -41,11 +41,19 @@ const Login = ({history}) => {
     ? <BeatLoader size={40} color={'#C0C0C0'}/>
     :<form onSubmit={loginUser}>
         <label>Email:</label>
-        <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
+        <input 
+          type="email" 
+          placeholder="Please enter email..."
+          required
+          onChange={(e) => setEmail(e.target.value)}></input>
         <label>Password:</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
-        <button type="submit">Log in!</button>
-        <Link to="/newpassword">Forgot password?</Link>
+        <input 
+          type="password" 
+          placeholder="Please enter password..."
+          required
+          onChange={(e) => setPassword(e.target.value)}></input>
+        <button type="submit" className="login-btn">Log in!</button>
+        <span className="login-forgot-password"><Link to="/newpassword">Forgot your password?</Link></span>
         {error && <Alert message={error.data.message}/>}
       </form>
     }

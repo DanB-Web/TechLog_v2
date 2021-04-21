@@ -1,6 +1,6 @@
 const companies = [
   {
-    name: "TechLog",
+    name: "TechLog Admin",
     address: "Surrey Lodge",
     primaryColor: "#0000cc",
     secondaryColor: "#ffffff",

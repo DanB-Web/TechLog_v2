@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-//COMMENT SCHEMA
+//LOCAL COMMENT SCHEMA
 const commentSchema = mongoose.Schema({
   user: {
     type: String,
@@ -16,7 +16,7 @@ const commentSchema = mongoose.Schema({
   }
 }, {timeStamps: true})
 
-//IMAGE SCHEMA
+//LOCAL IMAGE SCHEMA
 const imageSchema = mongoose.Schema({
     assetId: {
       type: String,
@@ -32,22 +32,7 @@ const imageSchema = mongoose.Schema({
     }
 }, {timeStamps: true})
 
-//APPROVEDBY SCHEMA
-const approvedBySchema = mongoose.Schema({
-  id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  }
-})
-
+//MAIN REPORT SCHEMA
 const reportSchema = mongoose.Schema({
   title: {
     type: String,
@@ -89,8 +74,8 @@ const reportSchema = mongoose.Schema({
     default: false
   },
   approvedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    //type: approvedBySchema,
+    //type: mongoose.Schema.Types.ObjectId <-- Throws cast error
+    type: mongoose.Types.ObjectId,
     default: null,
     ref: 'User'
   },

@@ -63,12 +63,8 @@ const authUser = async (req, res) => {
 
 const changePassword = async (req, res) => {
 
-  console.log('called');
-
   try {
     const {userId, password, newPassword} = req.body;
-
-    console.log(userId, password, newPassword);
 
     let passwordCheck = false;
     const user = await User.findById(userId);
@@ -80,7 +76,7 @@ const changePassword = async (req, res) => {
     if (user && passwordCheck) {
       user.password = newPassword;
       await user.save();
-      res.status(200).json({message: 'Password updated!'});
+      res.status(200).json({message: 'Password updated, check email!'});
     } else {
       res.status(403).json({message: 'Password update error!'});
     }
@@ -94,13 +90,22 @@ const changePassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
+
     const { email } = req.body;
-    sendMail(email, 'passwordReset');
-    res.status(200).json({message: 'Password reset!'});
+    
+    //CHECK DB FOR USER
+    const user = await User.findOne({email});
+
+    if (user) {
+      sendMail(email, 'passwordReset', generatePassword(6));
+      res.status(200).json({message: 'Password reset, check mail!'});
+    } else {
+      res.status(404).json({message: 'User does not exist!'});
+    }
   } catch (err) {
       console.log(err);
-      res.status(401);
-      throw new Error('Reset password error!')
+      res.status(500);
+      throw new Error('Reset password error!');
   }
 }
 

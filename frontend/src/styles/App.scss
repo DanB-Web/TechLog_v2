@@ -43,6 +43,8 @@ button:hover {
 
 //SOFT SHADOW ON TEXT INPUTS
 input[type="text"],
+input[type="email"],
+input[type="password"],
 textarea {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -53,9 +55,11 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
 textarea:focus {
   box-shadow: 0 0 5px var(--color-tag);
-  border: 1px solid var(--color-tag);
+  border: 3px solid var(--color-tag);
 }
 
 textarea {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/SearchBar.scss';
+import '../styles/Components/SearchBar.scss';
 
 const SearchTag = ({searchterm, removeSearchTerm}) => {
 

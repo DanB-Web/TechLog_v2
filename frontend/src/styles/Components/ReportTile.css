@@ -1,0 +1,67 @@
+.report-tile {
+  border: 1px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0.4rem;
+  width: 95%;
+  background-color: var(--color-tile);
+  border: 1px solid var(--color-form-border);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 15px 10px -15px #111;
+          box-shadow: 0px 15px 10px -15px #111;
+}
+
+.report-tile .report-tile-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 95%;
+  padding: 0.3rem;
+  border-bottom: 1px solid var(--color-form-border);
+}
+
+.report-tile .report-tile-title ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.report-tile .report-tile-title ul li {
+  color: var(--color-tag);
+  font-weight: bold;
+  margin: 0.3rem;
+}
+
+.report-tile .report-tile-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 0.4rem;
+  width: 95%;
+}
+
+.report-tile .report-tile-content p {
+  padding: 0.3rem;
+}
+
+.report-tile .report-tile-content button {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-bottom: 0.3rem;
+}
+/*# sourceMappingURL=ReportTile.css.map */

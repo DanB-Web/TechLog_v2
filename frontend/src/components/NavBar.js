@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-import '../styles/Navbar.css'
+import '../styles/Components/Navbar.scss'
 
 const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
 
@@ -16,9 +16,13 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
     <nav className="navbar">
 
       <div className="navbar-title">
-        <i className="fas fa-cogs fa-3x"></i>
-        <Link to='/search'><h1>TechLog</h1></Link>
-        {company && <h1 className="navbar-company-name"> - {company.name}</h1>}
+        <Link to='/search'>
+          <div className="navbar-logo">
+            <i className="fas fa-cogs fa-2x"></i>
+            <h2>TechLog</h2>
+          </div>
+        </Link>
+        {company && <h1 className="navbar-company-name">{company.name}</h1>}
       </div>
       
       <div className="navbar-links">
@@ -31,8 +35,8 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
         {(loggedIn) && <button 
           className="navbar-mode-switch"
           onClick={toggleMode}>{mode === 'light' 
-          ? <i className="fas fa-moon fa-3x"></i> 
-          : <i className="fas fa-sun fa-3x"></i>}
+          ? <i className="fas fa-moon fa-2x"></i> 
+          : <i className="fas fa-sun fa-2x"></i>}
         </button>}
       </div>
 

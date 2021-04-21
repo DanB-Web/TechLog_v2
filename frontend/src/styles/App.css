@@ -3,14 +3,17 @@ button {
   padding: 0.6rem;
   background-color: var(--color-primary);
   color: var(--color-secondary);
-  border: 2px solid var(--color-secondary);
-  border-radius: 5px;
+  border: none;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 button:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+  font-weight: bold;
+  border-radius: 15px;
 }
 
 @-webkit-keyframes fadeIn {
@@ -115,6 +118,8 @@ button:hover {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="password"],
 textarea {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -125,10 +130,12 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
 textarea:focus {
   -webkit-box-shadow: 0 0 5px var(--color-tag);
           box-shadow: 0 0 5px var(--color-tag);
-  border: 1px solid var(--color-tag);
+  border: 3px solid var(--color-tag);
 }
 
 textarea {
