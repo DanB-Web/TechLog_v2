@@ -73,7 +73,9 @@ export const addImage = async (imageInfo, company) => {
   await fetch(`${BACKEND_URL}/image`, {
     method: 'POST',
     body: JSON.stringify({ file: imageInfo, company: company }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${getToken()}`},
   }).then(res => res.json())
     .then(data => reply = data)
     .catch(err => console.log('IMAGE UPLOAD FETCH ERROR', err));
@@ -89,7 +91,8 @@ export const removeImage = async (imageId) => {
   await fetch(`${BACKEND_URL}/image`, {
     method: 'PUT',
     body: JSON.stringify({ data: imageId }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 
+               'Authorization': `Bearer ${getToken()}`},
   }).then(res => res.json())
     .then(data => reply = data)
     .catch(err => console.log('IMAGE DELETE FETCH ERROR', err));

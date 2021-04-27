@@ -17,16 +17,46 @@ const Checkbox = ({reportTags, setReportTags}) => {
 
   return (
     <div className="checkbox-container">
-        <label>Tag One</label>
-        <input type="checkbox" className="searchtag-checkbox" value="Tag One" onChange={tagHandler}/>
-        <label>Tag Two</label>
-        <input type="checkbox" className="searchtag-checkbox" value="Tag Two" onChange={tagHandler}/>
-        <label>Tag Three</label>
-        <input type="checkbox" className="searchtag-checkbox" value="Tag Three" onChange={tagHandler}/>
-        <label>Tag Four</label>
-        <input type="checkbox" className="searchtag-checkbox" value="Tag Four" onChange={tagHandler}/>
-        <label>Tag Five</label>
-        <input type="checkbox" className="searchtag-checkbox" value="Tag Five" onChange={tagHandler}/>
+        <div className="searchtag-container">
+          <label>#electrical</label>
+          <input 
+            type="checkbox" 
+            className="searchtag-checkbox" 
+            value="electrical" 
+            onChange={tagHandler}/>
+        </div>
+        <div className="searchtag-container">
+          <label>#hydraulic</label>
+          <input 
+            type="checkbox" 
+            className="searchtag-checkbox" 
+            value="hydraulic" 
+            onChange={tagHandler}/>
+        </div>
+        <div className="searchtag-container">
+          <label>#kystdesign</label>
+          <input 
+            type="checkbox" 
+            className="searchtag-checkbox" 
+            value="kystdesign" 
+            onChange={tagHandler}/>
+        </div>
+        <div className="searchtag-container">
+          <label>#schilling</label>
+          <input 
+            type="checkbox" 
+            className="searchtag-checkbox" 
+            value="schilling" 
+            onChange={tagHandler}/>
+        </div>
+        <div className="searchtag-container">
+          <label>#manipulator</label>
+          <input 
+            type="checkbox" 
+            className="searchtag-checkbox" 
+            value="manipulator" 
+            onChange={tagHandler}/>
+        </div>
     </div>
   )
 }
