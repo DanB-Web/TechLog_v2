@@ -2,17 +2,14 @@ import cloudinary from 'cloudinary';
 
 //MOVE TO SEPERATE FILE AND IMPORT
 cloudinary.v2.config({
-  cloud_name: "dasb94yfb",
-  api_key: "281265939685491",
-  api_secret: "3o36L3BCbF4V_vGz_u0unnERlFo"
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET
 })
 
 const addImage = async (req, res) => {
 
   try {
-
-    // const file = req.body.data;
-    // const company = req.body.company;
 
     const { file, company } = req.body;
 
