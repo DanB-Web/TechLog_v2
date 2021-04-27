@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import colors from 'colors';
 
-dotenv.config();
-
 //GRAPHQL
 import { ApolloServer, gql } from 'apollo-server-express';
 import fs from 'fs';
@@ -19,6 +17,7 @@ import { connectDB } from './config/database.js';
 
 //NEW APP INSTANCE AND .ENV VARIABLES
 const app = express();
+dotenv.config();
 const PORT = process.env.PORT || 5000 ;
 const MODE = process.env.NODE_ENV || 'env not found';
 
@@ -31,9 +30,6 @@ app.use(
 //IMAGE UPLOAD MIDDLEWARE
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
-//ENABLE PRE FLIGHT FOR CORS
-//app.options('*', cors());
 
 //APOLLO SERVER CONFIG
 const typeDefs = gql(fs.readFileSync('./graphql/schema.graphql', {encoding: 'utf8'}));
