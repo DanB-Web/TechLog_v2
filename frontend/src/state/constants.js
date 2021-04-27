@@ -1,4 +1,5 @@
-export const BACKEND_URL = 'http://localhost:3001';
+//export const BACKEND_URL = 'http://localhost:3001';
+export const BACKEND_URL = 'https://techlog-server-y7u7n.ondigitalocean.app';
 
 export const USER_LOGIN_REQUEST = 'USER_LOGIN_REQUEST';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
