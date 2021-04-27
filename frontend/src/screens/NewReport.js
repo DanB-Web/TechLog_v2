@@ -63,9 +63,9 @@ const NewReport = ({ history }) => {
     }
   }
 
-  const customTagHandler = (e) => {
+  const addCustomTagHandler = (e) => {
     e.preventDefault();
-    const copy = [...reportTags]
+    const copy = [...reportTags];
     copy.push(customTag);
     setReportTags(copy);
     setCustomTag('');
@@ -75,8 +75,18 @@ const NewReport = ({ history }) => {
     e.preventDefault();
     const copy = [...reportTags];
     //REMOVE # VIA SLICE
-    const filtered = copy.filter(tag => tag !== e.target.innerText.slice(1)); 
+    const tagText = e.target.innerText.slice(1);
+    //UPDATE REPORT TAG STATE
+    const filtered = copy.filter(tag => tag !== tagText); 
     setReportTags(filtered);
+    //CHECK IF CHECKBOX NEEDS UNSELECTING
+    const checkboxNodes = document.querySelectorAll('.searchtag-checkbox');
+    const checkboxArray = Array.from(checkboxNodes);
+    checkboxArray.forEach(checkbox => {
+      if (tagText === checkbox.value) {
+        checkbox.checked = false;
+      }
+    })
   }
 
   const addStepHandler = (e) => {
@@ -121,58 +131,72 @@ const NewReport = ({ history }) => {
       <form className="new-report-form" onSubmit={(e) => formSubmitHandler(e)}>
 
         <label>Report Title</label>
+        <hr/>
         <input 
           required
           className="new-report-title" 
           type="text" 
+          placeholder="Please enter a report title..."
           value={reportTitle} 
-          onChange={(e) => setReportTitle(e.target.value)}
-        ></input>
+          onChange={(e) => setReportTitle(e.target.value)}></input>
 
-        <label className="new-report-searchtags-title">Search Tags</label>
+        <label>Search Tags</label>
+        <p className="report-helper">Any search terms that will help to find the report in future</p>
+        <p className="report-helper">Click a tag to delete it.</p>
+        <hr/>
         <Checkbox 
           reportTags={reportTags}
           setReportTags={setReportTags}
         />
-        <ul className="new-report-searchtags-ul">{
-          reportTags.length > 0 && 
+        <ul className="new-report-tags-ul">{
+          reportTags.length > 0 ? 
           reportTags.map((tag, index) => {
-            return <li key={index} onClick={(e) => removeCustomTagHandler(e)}>#{tag}</li>
-          })
+            return <li key={index} onClick={(e) => removeCustomTagHandler(e)}>#{tag}</li> 
+          }) : <p>No tags yet...</p>
         }</ul>
 
         <input 
           type="text" 
+          placeholder="Please enter a custom tag.."
           value={customTag} 
           onChange={(e) => setCustomTag(e.target.value)}
         ></input>
+
         <button 
-          onClick={(e) => customTagHandler(e)}
+          onClick={(e) => addCustomTagHandler(e)}
         >Add Custom Tag</button>                                            
 
-        <label>Report Summary</label>  
+        <label>Report Summary</label>
+        <p className="report-helper">A short, descriptive summary of the issue</p>
+        <hr/>  
         <textarea 
           required
+          className="new-report-shortDesc"
+          placeholder="Please enter a short description..."
           value={reportShortDesc} 
           onChange={(e) => setReportShortDesc(e.target.value)}
         ></textarea> 
 
         <label>Description</label>
+        <p className="report-helper">A detailed description of the issue, and how it was resolved</p>
+        <hr/>
         <textarea 
           required
+          className="new-report-longDesc"
+          placeholder="Please enter a detailed description..."
           value={reportLongDesc} 
           onChange={(e) => setReportLongDesc(e.target.value)} 
         ></textarea>   
 
         <label>Steps</label>
+        <p className="report-helper">A step by step guide to resolving the issue, if appropriate.</p>
+        <p className="report-helper">Click a step to delete it.</p>
+        <hr/>
         <ul className="new-report-steps-ul">
           {reportSteps.length > 0 ? 
           reportSteps.map((step, index) => {
             return <li key={index} onClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
-          <Alert
-            message={'No steps added yet...'}
-            variant={'info'}
-          ></Alert>}  
+            <p>No steps yet...</p>} 
         </ul> 
 
         <input type="text" 
