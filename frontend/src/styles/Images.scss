@@ -1,0 +1,32 @@
+.images-container {
+  display: flex;
+  flex-direction: column;
+  .report-helper {
+    color: var(--color-form-border);
+  }
+  .no-images-text {
+    color: var(--color-form-border);
+    font-size: larger;
+    font-weight: bold;
+  }
+  .images-uploaded {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .image-thumbnail {
+      width: 150px;
+      min-height: 150px;
+      border: 2px solid transparent;
+    }
+    .image-thumbnail:hover {
+      border: 2px solid red;
+    }
+  }
+  .pic-upload-container {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}

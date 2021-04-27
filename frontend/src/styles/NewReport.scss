@@ -1,0 +1,82 @@
+.new-report-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  .new-report-form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    label {
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+    }
+    hr {
+      margin-bottom: 0.5rem;
+    }
+    input,
+    textarea {
+      font-size: large;
+      padding: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .report-helper {
+      color: var(--color-form-border);
+    }
+    .new-report-tags-ul {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: baseline;
+      flex-wrap: wrap;
+      min-height: 2rem;
+      li {
+        color: var(--color-tag);
+      }
+      p {
+        color: var(--color-form-border);
+        font-size: larger;
+        font-weight: bold;
+      }
+    }
+    .new-report-shortDesc {
+      min-height: 8rem;
+    }
+    .new-report-longDesc {
+      min-height: 20rem;
+    }
+    .new-report-steps-ul {
+      li {
+        font-size: large;
+        border: 2px solid transparent;
+      }
+      li:hover {
+        color: var(--color-danger);
+        border: 2px solid var(--color-danger);
+        border-radius: 5px;
+      }
+      p {
+        color: var(--color-form-border);
+        font-size: larger;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  flex-wrap: wrap;
+  .searchtag-container {
+    display: flex;
+    align-items: baseline;
+    label {
+      font-size: 1rem !important;
+      margin-top: 0rem !important;
+      margin-left: 0.5rem;
+      margin-right: 0.3rem;
+      color: var(--color-tag);
+    }
+  }
+}

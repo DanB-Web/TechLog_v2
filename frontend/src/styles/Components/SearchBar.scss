@@ -1,0 +1,70 @@
+.searchbar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding-top: 1.3rem;
+  .searchbar-no-terms {
+    position: absolute;
+    top: 2.5rem;
+    color: var(--color-form-border);
+    font-size: larger;
+    font-weight: bold;
+  }
+  form {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem;
+    i {
+      color: var(--color-tag);
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    input {
+      width: 50%;
+      margin-left: 0.5rem;
+      margin-right: 1rem;
+      padding: 0.4rem;
+      font-size: 1rem;
+      color: var(--color-tag);
+      font-weight: bold;
+    }
+    input:focus {
+      border: 3px solid var(--color-tag);
+    }
+    button {
+      padding: 0.3rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      width: 15%;
+    }
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    min-height: 3.7rem;
+  }
+}
+
+.searchTag {
+  button {
+    display: flex;
+    align-items: center;
+    margin: 0.3rem;
+    color: var(--color-tag);
+    font-weight: bold;
+    font-size: 1.3rem;
+    background: transparent;
+    border: 2px solid transparent;
+    box-shadow: none;
+  }
+  button:hover {
+    color: var(--color-danger);
+    border: 2px solid var(--color-danger);
+  }
+}

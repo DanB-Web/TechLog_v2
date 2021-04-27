@@ -1,0 +1,65 @@
+#Implied
+type Schema {
+  query: Query
+}
+
+#Queries
+type Query {
+  reportDetail(id: ID!): Report
+  companyDetails(id: ID!): Company
+  companyReports(id: ID!): [Report]
+  myReports(id: ID!): [Report]
+}
+
+#TypeDefs
+type Report {
+  id: ID!
+  title: String!
+  tags: [String]
+  shortDesc: String!
+  longDesc: String!
+  steps: [String]
+  images: [Image]
+  user: User!
+  comments: [Comment]
+  company: Company!
+  approved: Boolean
+  approvedBy: User
+}
+
+type Company {
+  id: ID!
+  name: String!
+  address: String!
+  primaryColor: String!
+  secondaryColor: String!
+  logoUrl: String!
+  users: [User!]
+  reports: [Report]
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  company: Company!
+  isAdmin: Boolean!
+  isDan: Boolean!
+  reports: [Report!]
+}
+
+scalar Date
+
+type Comment {
+  id: ID!
+  user: String!
+  comment: String!
+  time: Date!
+}
+
+type Image {
+  id: ID!
+  assetId: String!
+  publicId: String!
+  imageUrl: String!
+}
