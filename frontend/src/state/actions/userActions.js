@@ -16,6 +16,7 @@ import {
   USER_PASSWORD_RESET_REQUEST,
   USER_PASSWORD_RESET_SUCCESS,
   USER_PASSWORD_RESET_FAILURE,
+  // eslint-disable-next-line
   USER_PASSWORD_RESET_CLEAR,
 } from '../constants.js';
 
