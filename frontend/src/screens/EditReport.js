@@ -50,6 +50,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
   //DELETED STATE
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  // eslint-disable-next-line
   const [reportDeleted, setReportDeleted] = useState(false);
 
   useEffect(() => {         //???
