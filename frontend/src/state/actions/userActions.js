@@ -20,20 +20,13 @@ import {
   USER_PASSWORD_RESET_CLEAR,
 } from '../constants.js';
 
-const configNoToken = {
-  headers: {
-    'Content-Type':'application/json'
-  }
-}
-
-const configToken = {
-  headers: {
-    'Content-Type':'application/json',
-    'Authorization' : `Bearer ${getToken()}`
-  }
-}
-
 export const login = (email, password) => async (dispatch) => {
+
+  const configNoToken = {
+    headers: {
+      'Content-Type':'application/json'
+    }
+  }
   
   try {
     dispatch({
@@ -70,6 +63,13 @@ export const logout = () => (dispatch) => {
 
 export const passwordChange = (userId, password, newPassword) => async (dispatch) => {
 
+  const configToken = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization' : `Bearer ${getToken()}`
+    }
+  }
+
   try {
 
     dispatch({
@@ -93,6 +93,13 @@ export const passwordChange = (userId, password, newPassword) => async (dispatch
 }
 
 export const passwordReset = (email) => async (dispatch) => {
+
+  const configToken = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization' : `Bearer ${getToken()}`
+    }
+  }
 
   try {
 
