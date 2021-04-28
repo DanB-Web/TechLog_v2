@@ -1,25 +1,18 @@
 import axios from 'axios';
-//import store from '../state/store';
 import { getToken } from './helpers.js'
 
-const BACKEND_URL = 'http://localhost:3001';
-
-// //IMPORTING STORE TO ACCESS AUTH TOKEN
-// const getToken = () => {
-//   const state = store.getState();
-//   return state.userLogin.userInfo.token;
-// }
-
-//COMMON CONFIG OBJECT
-const config = {
-  headers: {
-    'Content-Type':'application/json',
-    'Authorization': `Bearer ${getToken()}`
-  }
-}
+//const BACKEND_URL = 'http://localhost:3001';
+const BACKEND_URL = 'https://techlog-server-y7u7n.ondigitalocean.app';
 
 //ADD NEW REPORT
 export const submitReport = async (newReport) => {
+
+  const config = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    }
+  }
 
   const reply = await axios.post(`${BACKEND_URL}/report`, {newReport}, config).catch(err => err.response);
   return reply;
@@ -27,6 +20,13 @@ export const submitReport = async (newReport) => {
 
 //EDIT EXISTING REPORT
 export const editReport = async (editedReport) => {
+
+  const config = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    }
+  }
 
   const reply = await axios.put(`${BACKEND_URL}/report`, {editedReport}, config).catch(err => err.response);
   return reply;
@@ -44,6 +44,13 @@ export const deleteReport = async (reportId, images) => {
 //ADD SINGLE COMMENT FROM REPORT PAGE
 export const addComment = async (reportId, comment, user) => {
 
+  const config = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    }
+  }
+
   const reply = await axios.post(`${BACKEND_URL}/comment`, {reportId, comment, user}, config).catch(err => err.response);
   return reply;
 
@@ -51,6 +58,13 @@ export const addComment = async (reportId, comment, user) => {
 
 //ADD USER TO COMPANY
 export const addUser = async (name, email, isAdmin, company) => {
+
+  const config = {
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    }
+  }
 
   let reply = await axios.post(`${BACKEND_URL}/user`, {name, email, isAdmin, company}, config).catch(err => err.response);  //RETURNS ERROR
   return reply;
