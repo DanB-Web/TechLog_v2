@@ -71,6 +71,26 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
+//MAIN BODY
+body {
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h4,
+label,
+p,
+li {
+  color: var(--color-font);
+}
+
+input,
+textarea {
+  color: var(--color-font);
+  background-color: var(--color-form-boder);
+}
+
 //BACKDROP STYLES
 .backdrop-container {
   position: fixed;

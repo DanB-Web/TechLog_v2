@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { addImage, removeImage } from '../utils/rest';
 
-import '../styles/Images.scss';
+import '../styles/Components/Images.scss';
 
 const Images = ({ reportImages, setReportImages }) => {
 
@@ -65,7 +65,7 @@ const Images = ({ reportImages, setReportImages }) => {
     <div className="images-container">
       <label>Images</label>
       <p className="report-helper">Any supporting images.</p>
-      <p className="report-helper">Click an image to delete it.</p>
+      <p className="report-helper">Double click an image to delete it.</p>
       <hr/>
       <div>
         {reportImages.length === 0 ? 
@@ -77,7 +77,7 @@ const Images = ({ reportImages, setReportImages }) => {
               data-publicid={image.publicId} 
               src={image.imageUrl} 
               alt={image.assetId}
-              onClick={removeImageHandler}  
+              onDoubleClick={removeImageHandler}  
               /></li>
           })}
         </ul>

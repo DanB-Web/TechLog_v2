@@ -10,7 +10,7 @@ import Alert from '../components/Alert';
 
 import { BeatLoader } from 'react-spinners';
 
-import '../styles/NewReport.scss';
+import '../styles/Screens/NewReport.scss';
 
 const NewReport = ({ history }) => {
 
@@ -142,7 +142,7 @@ const NewReport = ({ history }) => {
 
         <label>Search Tags</label>
         <p className="report-helper">Any search terms that will help to find the report in future</p>
-        <p className="report-helper">Click a tag to delete it.</p>
+        <p className="report-helper">Double click a tag to delete it.</p>
         <hr/>
         <Checkbox 
           reportTags={reportTags}
@@ -151,7 +151,7 @@ const NewReport = ({ history }) => {
         <ul className="new-report-tags-ul">{
           reportTags.length > 0 ? 
           reportTags.map((tag, index) => {
-            return <li key={index} onClick={(e) => removeCustomTagHandler(e)}>#{tag}</li> 
+            return <li key={index} onDoubleClick={(e) => removeCustomTagHandler(e)}>#{tag}</li> 
           }) : <p>No tags yet...</p>
         }</ul>
 
@@ -190,12 +190,12 @@ const NewReport = ({ history }) => {
 
         <label>Steps</label>
         <p className="report-helper">A step by step guide to resolving the issue, if appropriate.</p>
-        <p className="report-helper">Click a step to delete it.</p>
+        <p className="report-helper">Double click a step to delete it.</p>
         <hr/>
         <ul className="new-report-steps-ul">
           {reportSteps.length > 0 ? 
           reportSteps.map((step, index) => {
-            return <li key={index} onClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
+            return <li key={index} onDoubleClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
             <p>No steps yet...</p>} 
         </ul> 
 

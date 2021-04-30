@@ -12,6 +12,16 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
 
   const company = useSelector((state) => state.company.company);
   
+  //RENDER COMPANY LOGO ON RENDER COMPLETION
+  // useEffect(() => {
+  //   if (company) {
+  //     const { companySvg } = company;
+  //     const formatedSvg = stringToHtml(companySvg);
+  //     const svgNode = formatedSvg.childNodes[0];
+  //     document.querySelector('.navbar-logo').appendChild(svgNode);
+  //   }
+  // }, [company])
+  
   return (
     <nav className="navbar">
 
@@ -22,7 +32,7 @@ const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
             <h2>TechLog</h2>
           </div>
         </Link>
-        {company && <h1 className="navbar-company-name">{company.name}</h1>}
+        {company && <h1>{company.name}</h1>}
       </div>
       
       <div className="navbar-links">
