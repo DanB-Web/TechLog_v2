@@ -62,9 +62,15 @@
     background: transparent;
     border: 2px solid transparent;
     box-shadow: none;
+    p {
+      color: var(--color-tag);
+    }
   }
   button:hover {
     color: var(--color-danger);
     border: 2px solid var(--color-danger);
+    p {
+      color: var(--color-danger);
+    }
   }
 }

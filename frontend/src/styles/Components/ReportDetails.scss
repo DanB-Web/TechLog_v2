@@ -55,6 +55,20 @@
       color: var(--color-tag);
     }
   }
+  .report-details-image-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 1rem;
+    .report-detail-image-thumbs {
+      width: 200px;
+      height: 200px;
+    }
+    .report-detail-image-thumbs:hover {
+      opacity: 0.7;
+    }
+  }
+
   .report-details-buttons {
     display: flex;
     justify-content: space-evenly;
@@ -118,4 +132,21 @@
   background-color: var(--color-primary); /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 3px solid var(--color-border); /* creates padding around scroll thumb */
+}
+
+//DETAILED IMAGE STYLES
+.detailed-image-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 80%;
+    height: 80%;
+  }
+  .detailed-image-text {
+    color: #fff;
+    font-weight: 900;
+  }
 }
