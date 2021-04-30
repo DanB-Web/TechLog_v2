@@ -10,6 +10,7 @@ const SearchBar = ({ searchTerms, addSearchTerm, removeSearchTerm }) => {
 
   const addSearchTermHandler = (e) => {
     e.preventDefault();
+    if (searchTerm === '') return;
     addSearchTerm(searchTerm);
     document.querySelector('.search-term-form').reset();
   } 
