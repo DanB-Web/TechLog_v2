@@ -197,8 +197,9 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   if (showConfirmDelete) {
     return <>
       <p>Are you sure you want to delete {title}?</p>
+      <p>Double click to confirm</p>
       <button onClick={setShowConfirmDeleteHandler}>BACK</button>
-      <button onClick={reportDeleteHandler}>CONFIRM</button>
+      <button onDoubleClick={reportDeleteHandler}>CONFIRM</button>
     </>
   }
 

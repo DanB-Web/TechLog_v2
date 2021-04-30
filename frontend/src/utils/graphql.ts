@@ -26,7 +26,7 @@ export async function getCompanyDetails(id: any) {
         address
         primaryColor
         secondaryColor
-        logoUrl
+        companySvg
       }
     }
   `;

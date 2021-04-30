@@ -1,0 +1,43 @@
+.company-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .add-company-user-container {
+    margin-top: 2rem;
+    width: 80%;
+    .add-company-user-form-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      form {
+        margin-top: 0.7rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 60%;
+        .add-company-user-input {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding: 0.4rem;
+          label {
+            width: 30%;
+          }
+          input {
+            width: 40%;
+          }
+        }
+        button {
+          position: absolute;
+          height: 40px;
+          width: 80px;
+          top: 50%;
+          margin-top: -20px;
+          right: 10%;
+          margin-right: -40px;
+        }
+      }
+    }
+  }
+}
