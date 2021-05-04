@@ -41,12 +41,14 @@ const Login = ({history}) => {
     ? <BeatLoader size={40} color={'#C0C0C0'}/>
     :<form onSubmit={loginUser}>
         <label>Email:</label>
+        <hr/>
         <input 
           type="email" 
           placeholder="Please enter email..."
           required
           onChange={(e) => setEmail(e.target.value)}></input>
         <label>Password:</label>
+        <hr/>
         <input 
           type="password" 
           placeholder="Please enter password..."

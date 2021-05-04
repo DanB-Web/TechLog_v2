@@ -1,0 +1,33 @@
+.myprofile-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .myprofile-form-input-container {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      .myprofile-form-input {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: baseline;
+        .myprofile-label {
+          width: 30%;
+        }
+        input {
+          width: 60%;
+          height: 1.8rem;
+        }
+      }
+    }
+    button {
+      height: 2rem;
+    }
+  }
+}

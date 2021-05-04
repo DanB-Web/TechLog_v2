@@ -8,7 +8,7 @@ import { BeatLoader } from 'react-spinners';
 
 import Alert from '../components/Alert';
 
-import '../styles/MyProfile.scss';
+import '../styles/Screens/MyProfile.scss';
 
 const Profile = ({ history }) => {
 
@@ -52,15 +52,29 @@ const Profile = ({ history }) => {
   
   return (
     <div className="myprofile-container">
-      <h2>Change Password</h2>
+      <label>Change Password</label>
+      <hr/>
       <form onSubmit={changePasswordHandler}>
-        <label>Current password</label>
-        <input value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} type="password" required></input>
-        <label>New password</label>
-        <input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="password" required></input>
-        <label>Confirm new password</label>
-        <input value={confirmNewPassword} onChange={e => setConfirmNewPassword(e.target.value)} type="password" required></input>
+
+        <div className="myprofile-form-input-container">
+
+          <div className="myprofile-form-input">
+            <label className="myprofile-label">Current Password:</label>
+            <input value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} type="password" required></input> 
+          </div>
+          <div className="myprofile-form-input">
+            <label className="myprofile-label">New Password:</label>
+            <input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="password" required></input>
+          </div>
+          <div className="myprofile-form-input">
+            <label className="myprofile-label">Confirm New Password:</label>
+            <input value={confirmNewPassword} onChange={e => setConfirmNewPassword(e.target.value)} type="password" required></input>
+          </div>
+
+        </div>
+
         <button type="submit">Change password</button>
+
       </form>
 
       {passwordMismatch && 

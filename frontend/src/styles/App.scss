@@ -37,6 +37,19 @@ a:active {
   color: inherit;
 }
 
+label {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+hr {
+  margin-bottom: 0.5rem;
+}
+
+.report-helper {
+  color: var(--color-font-helper);
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -60,6 +73,12 @@ input[type="password"]:focus,
 textarea:focus {
   box-shadow: 0 0 5px var(--color-tag);
   border: 3px solid var(--color-tag);
+}
+
+input,
+textarea {
+  font-size: large;
+  padding: 0.5rem;
 }
 
 textarea {
@@ -106,5 +125,9 @@ textarea {
 
 //LOADER STYLES
 .beat-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-top: 5rem;
 }
