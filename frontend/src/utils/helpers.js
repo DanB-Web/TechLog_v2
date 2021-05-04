@@ -22,3 +22,10 @@ export const getToken = () => {
   return state.userLogin.userInfo.token;
 }
 
+//CREATE SVG FROM DB STRING
+export const stringToHtml = (string) => {
+  const parser = new DOMParser();
+  const node = parser.parseFromString(string, 'text/html');
+  return node.body;
+}
+

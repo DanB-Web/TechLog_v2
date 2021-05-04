@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import '../styles/App.scss';
-import '../styles/Drawer.scss';
+import '../styles/Components/Drawer.scss';
 
 const Drawer = ({toggleDrawer, logout}) => {
 

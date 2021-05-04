@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-/*NOTE MODAL IS OUTSIDE OF SWITCH SO HAVE TO USE LINK TAG TO ROUTE TO '/editreport'*/
+/*NOTE REPORT MODAL IS OUTSIDE OF SWITCH SO HAVE TO USE LINK TAG TO ROUTE TO '/editreport'*/
 import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
@@ -16,6 +16,10 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
   const [newComment, setNewComment] = useState('');
   const [commentSuccess, setCommentSuccess] = useState(false);
   const [commentFailure, setCommentFailure] = useState(false);
+
+  //STATE FOR PIC DETAILS
+  const [showPic, setShowPic] = useState(false);
+  const [picUrl, setPicUrl] = useState('');
 
   const loggedUser = useSelector((state) => state.userLogin);
   const {userInfo: {name, isAdmin}} = loggedUser;
@@ -55,6 +59,21 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
         setCommentFailure(true);
       }
     }  
+  }
+
+  const showPicToggle = (e) => {
+    setShowPic(!showPic);
+    showPic ? setPicUrl('') : setPicUrl(e.target.src) 
+  }
+
+  if (showPic) {
+    return <div className="detailed-image-container">
+      <img className="detailed-image" 
+           src={picUrl} 
+           alt="report-img" 
+           onClick={showPicToggle}/>
+      <p className="detailed-image-text">Click image to close...</p>
+    </div>
   }
 
   return (
@@ -101,13 +120,14 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
     
       {images.length > 0 && <>
         <h4>Images</h4>
-        <ul>
+        <ul className="report-details-image-container">
           {images.map(image  => {
               return <img 
-                className="report-detail-image"
+                className="report-detail-image-thumbs"
                 key={image.assetId}
                 src={image.imageUrl} 
                 alt={image.assetId}
+                onClick={showPicToggle}
                 />
             })}
         </ul>

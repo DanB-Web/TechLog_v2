@@ -1,0 +1,28 @@
+.user-tile-container {
+  display: flex;
+  margin-bottom: 0.6rem;
+  padding: 0.5rem;
+  background-color: var(--color-tile);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  .user-tile-name {
+    width: 30%;
+  }
+  .user-tile-email {
+    width: 30%;
+  }
+  .user-tile-role {
+    width: 20%;
+  }
+  .user-tile-select {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin-right: 0.8rem;
+    }
+    input {
+      height: 1rem;
+    }
+  }
+}

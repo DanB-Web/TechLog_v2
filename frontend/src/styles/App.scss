@@ -37,6 +37,19 @@ a:active {
   color: inherit;
 }
 
+label {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+hr {
+  margin-bottom: 0.5rem;
+}
+
+.report-helper {
+  color: var(--color-font-helper);
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -62,6 +75,12 @@ textarea:focus {
   border: 3px solid var(--color-tag);
 }
 
+input,
+textarea {
+  font-size: large;
+  padding: 0.5rem;
+}
+
 textarea {
   resize: none;
 }
@@ -69,6 +88,26 @@ textarea {
 //SMOOTH SCROLL
 html:focus-within {
   scroll-behavior: smooth;
+}
+
+//MAIN BODY
+body {
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h4,
+label,
+p,
+li {
+  color: var(--color-font);
+}
+
+input,
+textarea {
+  color: var(--color-font);
+  background-color: var(--color-form-boder);
 }
 
 //BACKDROP STYLES
@@ -86,5 +125,9 @@ html:focus-within {
 
 //LOADER STYLES
 .beat-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-top: 5rem;
 }

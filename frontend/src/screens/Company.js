@@ -4,17 +4,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCompanyUsers } from '../state/actions/companyActions';
 
 import { BeatLoader } from 'react-spinners';
+import Switch from 'react-switch';
 
 import { addUser as addUserRest, deleteUsers as deleteUsersRest } from '../utils/rest.js';
 
 import UserTile from '../components/UserTile.js';
 import Alert from '../components/Alert.js';
 
+import '../styles/Screens/Company.scss';
+
 const Company = ({ history }) => {
 
   const auth = useSelector((state) => state.userLogin.loggedIn);
   !auth && history.push('/login');
 
+  //INITIAL PAGE STATE
   const initialState = {
     username: '',
     userEmail: '',
@@ -27,6 +31,7 @@ const Company = ({ history }) => {
     deleteError: '',
   }
 
+  //PAGE REDUCER
   const pageReducer = (state, action) => {
     switch (action.type) {
       case 'USER_NAME' : 
@@ -113,29 +118,47 @@ const Company = ({ history }) => {
     }
   }
 
+  console.log(pageState);
+
   return (
     <div className="company-container">
 
-      <div className="company-add-user"> 
+      <div className="add-company-user-container"> 
       {pageState.submitLoading ? 
-        <p>Uploading user...</p> :
-        <form className="add-company-user" onSubmit={(e) => newUserHandler(e)}>
-          <label>New User Name</label>
-          <input type="text" 
-                 value={pageState.username} 
-                 onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
-                 required></input>
-          <label>New User Email</label>
-          <input type="email" 
-                 value={pageState.userEmail} 
-                 onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
-                 required></input>
-          <label>Admin</label>
-          <input type="checkbox" 
-                 checked={pageState.userAdmin}
-                 onChange={() => adminToggleHandler()}/>
-          <button type="submit">Add User</button>
-        </form>
+        <div className="beat-loader"> 
+            <BeatLoader size={40} color={'#C0C0C0'}/>
+        </div> :
+        <div className="add-company-user-form-container">
+        
+          <label>Add New User</label>
+          <hr/>
+          <form className="add-company-user-form" onSubmit={(e) => newUserHandler(e)}>
+          <div>
+            <div>
+              <label>New User Name:</label>
+              <input type="text" 
+                    placeholder="Enter new user name..."
+                    value={pageState.username} 
+                    onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
+                    required></input>
+            </div>
+            <div>
+              <label>New User Email: </label>
+              <input type="email" 
+                    placeholder="Enter new user email..."
+                    value={pageState.userEmail} 
+                    onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
+                    required></input>
+            </div>
+
+          <label className="add-company-user-admin-switch">
+            <span>Admin:</span>
+            <Switch className="admin-switch" onChange={adminToggleHandler} checked={pageState.userAdmin} />
+          </label>
+        </div>
+            <button type="submit">Add User</button>
+          </form>
+        </div>
         }
       </div>
 
@@ -154,14 +177,22 @@ const Company = ({ history }) => {
           }
       </div>
 
+    
+
       <div className="company-users">
         {loading ? 
          <div className="beat-loader"> 
             <BeatLoader size={40} color={'#C0C0C0'}/>
          </div> :
-         users ? 
-            users.map(user => <UserTile key={user.id} user={user} checkboxHandler={checkboxHandler}/>) :
-        <p>No users...</p>
+         users ?
+        <div>
+          <label>Current Users</label> 
+          <hr/>
+          <div className="company-user-tile-container">
+            {users.map(user => <UserTile key={user.id} user={user} checkboxHandler={checkboxHandler}/>)} 
+          </div>
+        </div> :
+        <p>No current users...</p>
         }
 
         <div className="company-delete-user-alerts">
@@ -172,8 +203,9 @@ const Company = ({ history }) => {
            null 
             }
         </div>
-        <button onClick={deleteUsersHandler}>Delete selected users</button>
       </div>
+
+        <button className="delete-user-button" onClick={deleteUsersHandler}>Delete selected users</button>
 
     </div>
   )

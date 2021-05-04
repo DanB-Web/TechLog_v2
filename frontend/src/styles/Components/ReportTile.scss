@@ -6,9 +6,9 @@
   margin: 0.4rem;
   width: 95%;
   background-color: var(--color-tile);
-  border: 1px solid var(--color-form-border);
+  border: none;
   border-radius: 5px;
-  box-shadow: 0px 15px 10px -15px #111;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .report-tile-title {
     display: flex;
     justify-content: space-between;

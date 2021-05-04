@@ -3,14 +3,11 @@
   min-height: 85vh;
   display: flex;
   justify-content: center;
-  margin-top: 8%;
+  margin-top: 6%;
   form {
     display: flex;
     flex-direction: column;
     width: 40%;
-    label {
-      margin-bottom: 1rem;
-    }
     input {
       width: 100%;
       margin-bottom: 2rem;

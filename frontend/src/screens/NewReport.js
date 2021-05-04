@@ -10,7 +10,7 @@ import Alert from '../components/Alert';
 
 import { BeatLoader } from 'react-spinners';
 
-import '../styles/NewReport.scss';
+import '../styles/Screens/NewReport.scss';
 
 const NewReport = ({ history }) => {
 
@@ -136,13 +136,13 @@ const NewReport = ({ history }) => {
           required
           className="new-report-title" 
           type="text" 
-          placeholder="Please enter a report title..."
+          placeholder="Enter a report title..."
           value={reportTitle} 
           onChange={(e) => setReportTitle(e.target.value)}></input>
 
         <label>Search Tags</label>
-        <p className="report-helper">Any search terms that will help to find the report in future</p>
-        <p className="report-helper">Click a tag to delete it.</p>
+        <p className="report-helper">Any search terms that will help to find the report</p>
+        <p className="report-helper">Double click a tag to delete it</p>
         <hr/>
         <Checkbox 
           reportTags={reportTags}
@@ -151,13 +151,13 @@ const NewReport = ({ history }) => {
         <ul className="new-report-tags-ul">{
           reportTags.length > 0 ? 
           reportTags.map((tag, index) => {
-            return <li key={index} onClick={(e) => removeCustomTagHandler(e)}>#{tag}</li> 
+            return <li key={index} onDoubleClick={(e) => removeCustomTagHandler(e)}>#{tag}</li> 
           }) : <p>No tags yet...</p>
         }</ul>
 
         <input 
           type="text" 
-          placeholder="Please enter a custom tag.."
+          placeholder="Enter a custom tag.."
           value={customTag} 
           onChange={(e) => setCustomTag(e.target.value)}
         ></input>
@@ -171,8 +171,8 @@ const NewReport = ({ history }) => {
         <hr/>  
         <textarea 
           required
-          className="new-report-shortDesc"
-          placeholder="Please enter a short description..."
+          className="report-shortDesc"
+          placeholder="Enter a short description..."
           value={reportShortDesc} 
           onChange={(e) => setReportShortDesc(e.target.value)}
         ></textarea> 
@@ -182,26 +182,27 @@ const NewReport = ({ history }) => {
         <hr/>
         <textarea 
           required
-          className="new-report-longDesc"
-          placeholder="Please enter a detailed description..."
+          className="report-longDesc"
+          placeholder="Enter a detailed description..."
           value={reportLongDesc} 
           onChange={(e) => setReportLongDesc(e.target.value)} 
         ></textarea>   
 
         <label>Steps</label>
-        <p className="report-helper">A step by step guide to resolving the issue, if appropriate.</p>
-        <p className="report-helper">Click a step to delete it.</p>
+        <p className="report-helper">A step by step guide to resolving the issue</p>
+        <p className="report-helper">Double click a step to delete it</p>
         <hr/>
         <ul className="new-report-steps-ul">
           {reportSteps.length > 0 ? 
           reportSteps.map((step, index) => {
-            return <li key={index} onClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
+            return <li key={index} onDoubleClick={(e) => removeStepHandler(e)}>{index + 1}: {step}</li>}) :
             <p>No steps yet...</p>} 
         </ul> 
 
         <input type="text" 
-          onChange={(e) => setNewStep(e.target.value)} 
+          placeholder="Enter a step..."
           value={newStep}
+          onChange={(e) => setNewStep(e.target.value)} 
         ></input>
         <button onClick={(e) => addStepHandler(e)}>Add Step</button>
 

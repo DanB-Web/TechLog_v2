@@ -2,6 +2,8 @@ html {
   --color-primary: #db162f;
   --color-secondary: #fbfbfb;
   --color-background: #ffffff;
+  --color-font: #28394a;
+  --color-font-helper: #adb5bd;
   --color-form-border: #adb5bd;
   --color-success: #00bc8c;
   --color-info: #3498db;
@@ -12,16 +14,18 @@ html {
 }
 
 html[data-theme="dark"] {
-  --color-primary: #444444 !important;
+  --color-primary: #03dac6 !important;
   --color-secondary: #375a7f !important;
-  --color-background: #222222;
-  --color-form-border: #adb5bd;
-  --color-success: #00bc8c;
+  --color-background: #121212;
+  --color-font: #f2f2f2;
+  --color-font-helper: #adb5bd;
+  --color-form-border: #28394a;
+  --color-success: #03dac6;
   --color-info: #3498db;
   --color-warning: #fc9c12;
-  --color-danger: #e74c3c;
-  --color-tag: #007053;
-  --color-tile: #dddddd;
+  --color-danger: #cf6679;
+  --color-tag: #03dac6;
+  --color-tile: #1f1b24;
 }
 
 /*Smooth transition between light/dark mode*/
