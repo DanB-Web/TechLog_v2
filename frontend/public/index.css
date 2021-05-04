@@ -3,6 +3,7 @@ html {
   --color-secondary: #fbfbfb;
   --color-background: #ffffff;
   --color-font: #28394a;
+  --color-font-helper: #adb5bd;
   --color-form-border: #adb5bd;
   --color-success: #00bc8c;
   --color-info: #3498db;
@@ -17,6 +18,7 @@ html[data-theme="dark"] {
   --color-secondary: #375a7f !important;
   --color-background: #121212;
   --color-font: #f2f2f2;
+  --color-font-helper: #adb5bd;
   --color-form-border: #28394a;
   --color-success: #03dac6;
   --color-info: #3498db;

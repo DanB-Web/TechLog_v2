@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCompanyUsers } from '../state/actions/companyActions';
 
 import { BeatLoader } from 'react-spinners';
+import Switch from 'react-switch';
 
 import { addUser as addUserRest, deleteUsers as deleteUsersRest } from '../utils/rest.js';
 
@@ -117,6 +118,8 @@ const Company = ({ history }) => {
     }
   }
 
+  console.log(pageState);
+
   return (
     <div className="company-container">
 
@@ -126,29 +129,33 @@ const Company = ({ history }) => {
             <BeatLoader size={40} color={'#C0C0C0'}/>
         </div> :
         <div className="add-company-user-form-container">
-          <label>Add new company user</label>
+        
+          <label>Add New User</label>
           <hr/>
           <form className="add-company-user-form" onSubmit={(e) => newUserHandler(e)}>
-            <div className="add-company-user-input">
+          <div>
+            <div>
               <label>New User Name:</label>
               <input type="text" 
+                    placeholder="Enter new user name..."
                     value={pageState.username} 
                     onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
                     required></input>
             </div>
-            <div className="add-company-user-input">
-              <label>New User Email:</label>
+            <div>
+              <label>New User Email: </label>
               <input type="email" 
+                    placeholder="Enter new user email..."
                     value={pageState.userEmail} 
                     onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
                     required></input>
             </div>
-            <div className="add-company-user-input">
-              <label>Admin:</label>
-              <input type="checkbox" 
-                    checked={pageState.userAdmin}
-                    onChange={() => adminToggleHandler()}/>
-            </div>
+
+          <label className="add-company-user-admin-switch">
+            <span>Admin:</span>
+            <Switch className="admin-switch" onChange={adminToggleHandler} checked={pageState.userAdmin} />
+          </label>
+        </div>
             <button type="submit">Add User</button>
           </form>
         </div>
@@ -170,6 +177,8 @@ const Company = ({ history }) => {
           }
       </div>
 
+    
+
       <div className="company-users">
         {loading ? 
          <div className="beat-loader"> 
@@ -177,9 +186,11 @@ const Company = ({ history }) => {
          </div> :
          users ?
         <div>
-          <label>Current company users</label>
+          <label>Current Users</label> 
           <hr/>
-          {users.map(user => <UserTile key={user.id} user={user} checkboxHandler={checkboxHandler}/>)} 
+          <div className="company-user-tile-container">
+            {users.map(user => <UserTile key={user.id} user={user} checkboxHandler={checkboxHandler}/>)} 
+          </div>
         </div> :
         <p>No current users...</p>
         }
@@ -192,8 +203,9 @@ const Company = ({ history }) => {
            null 
             }
         </div>
-        <button onClick={deleteUsersHandler}>Delete selected users</button>
       </div>
+
+        <button className="delete-user-button" onClick={deleteUsersHandler}>Delete selected users</button>
 
     </div>
   )

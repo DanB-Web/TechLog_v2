@@ -13,7 +13,7 @@ import Images from '../components/Images';
 import ReportComment from '../components/ReportComment';
 import Alert from '../components/Alert';
 
-import '../styles/EditReport.scss';
+import '../styles/Screens/EditReport.scss';
 
 const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
@@ -94,6 +94,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
   const addTagHandler = (e) => {
     e.preventDefault();
+    if (newTag === '') return;
     const copy = [...editTags];
     copy.push(newTag);
     setEditTags(copy);
@@ -195,12 +196,15 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   }
 
   if (showConfirmDelete) {
-    return <>
-      <p>Are you sure you want to delete {title}?</p>
+    return <div className="confirm-delete-container">
+      <p>Are you sure you want to delete '{title}'?</p>
       <p>Double click to confirm</p>
-      <button onClick={setShowConfirmDeleteHandler}>BACK</button>
-      <button onDoubleClick={reportDeleteHandler}>CONFIRM</button>
-    </>
+      <div className="confirm-delete-buttons">
+        <button onClick={setShowConfirmDeleteHandler}>BACK</button>
+        <button onDoubleClick={reportDeleteHandler}>CONFIRM</button>
+      </div>
+      
+    </div>
   }
 
   return (
@@ -209,20 +213,26 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
       <form className="edit-report-form" onSubmit={submitEditHandler}>
 
         <label>Title</label>
+        <hr/>
         <input 
+          className="edit-report-title"
+          type="text" 
           required
-          className="edit-report-title" 
-          type="text" value={editTitle} 
+          placeholder="Please enter a report title..."
+          value={editTitle} 
           onChange={(e) => setEditTitle(e.target.value)}
          ></input>
 
         <label>Author</label>
+        <hr/>
         <p>{user && user.name}</p>
 
         <label>Contact</label>
+        <hr/>
         <p>{user && user.email}</p>
 
         <label>SearchTags</label>
+        <hr/>
         <ul className="edit-report-searchtags">
           {editTags && editTags.map((tag, index) => {
             return <li key={index}># {tag} <button onClick={removeTagHandler}>X</button></li>
@@ -230,26 +240,35 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
         </ul>
         <input 
           type="text" 
+          placeholder="Please enter a custom tag.."
           value={newTag} 
           onChange={(e) => {setNewTag(e.target.value)}}
         ></input>
         <button onClick={addTagHandler}>Add Tag</button>
 
         <label>Short Description</label>
+        <hr/>
         <textarea 
+          className="report-shortDesc"
           required
+          placeholder="Please enter a short description..."
           value={editShortDesc} 
           onChange={(e) => setEditShortDesc(e.target.value)}
          ></textarea>
 
         <label>Long Description</label>
+        <hr/>
         <textarea 
+          className="report-longDesc"
           required
+          placeholder="Please enter a detailed description..."
           value={editLongDesc} 
           onChange={(e) => setEditLongDesc(e.target.value)}
         ></textarea>
 
         <label>Steps</label>
+        <p className="report-helper">Drag and drop to reorder</p>
+        <hr/>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="edit-report-steps">
             {(provided) => (
@@ -272,7 +291,8 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
         </DragDropContext>
 
         <input 
-          type="text" 
+          type="text"
+          placeholder="Please add a step..." 
           value={newStep} 
           onChange={(e) => {setNewStep(e.target.value)}}
         ></input>
@@ -283,23 +303,24 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
           setReportImages={setEditImages}
         />
 
-        <label>
-          <span>Report Approved:</span>
+        <label className="report-approved-container">
+          <span className="report-approved-label">Report Approved:</span>
           <Switch onChange={approvedHandler} checked={reportApproved} />
-          <span>{reportApprovedUser && <p>{reportApprovedUser.name}</p>}</span>
+          <span className="report-approved-user">{reportApprovedUser && <p>Approver: {reportApprovedUser.name}</p>}</span>
         </label>
 
-        <button type="submit">SUBMIT</button>
+        <button type="submit" className="edit-submit-button">SUBMIT</button>
 
         <button onClick={setShowConfirmDeleteHandler}>DELETE</button>
 
         <label>Comments</label>
+        <hr/>
         <ul className="edit-report-comments">
-          {editComments.map((comment, index) => {
+          {editComments.length > 0 ? editComments.map((comment, index) => {
             return <li key={index}>
             <ReportComment comment={comment}></ReportComment>
             <button onClick={(e) => removeCommentHandler(e, comment.id)}>X</button></li>
-          })}
+          }): <p>No comments yet...</p>}
         </ul>
       </form>
     </div>

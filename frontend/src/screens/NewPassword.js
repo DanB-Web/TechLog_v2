@@ -36,6 +36,7 @@ const NewPassword = () => {
     <div className="reset-password-container">
       <form className="reset-password-form" onSubmit={newPasswordHandler}>
         <label>Enter your registered email:</label>
+        <hr/>
           <input 
             type="email" 
             placeholder="Please enter email..."

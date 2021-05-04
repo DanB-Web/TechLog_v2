@@ -83,7 +83,7 @@ const SearchReports = ({ history, setViewReport, setReportDetails }) => {
         <>
           {isAdmin && <label className="search-reports-unapproved-switch">
             <Switch onChange={showApprovedHandler} checked={showUnapproved} />
-            <p>Show Unapproved</p>
+            <p>Unapproved</p>
           </label>}
 
           <SearchBar 
