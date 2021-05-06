@@ -24,7 +24,6 @@ const Images = ({ reportImages, setReportImages }) => {
 
     reader.onloadend = async () => {
      const result = await addImage(reader.result, company);
-     console.log('result', result)
      addToImageArray(result);
      setFileInputState('');
      setSelectedFile('');
