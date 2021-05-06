@@ -1,4 +1,3 @@
-
 //const BACKEND_URL : string = 'http://localhost:3001/graphql'; 
 const BACKEND_URL : string = 'https://techlog-server-y7u7n.ondigitalocean.app/graphql';
 

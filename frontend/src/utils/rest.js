@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { getToken } from './helpers.js'
+import { getToken } from './helpers.js';
+
+import { BACKEND_URL } from '../state/constants.js';
 
 //const BACKEND_URL = 'http://localhost:3001';
-const BACKEND_URL = 'https://techlog-server-y7u7n.ondigitalocean.app';
+//const BACKEND_URL = 'https://techlog-server-y7u7n.ondigitalocean.app';
 
 //ADD NEW REPORT
 export const submitReport = async (newReport) => {
@@ -83,7 +85,7 @@ export const deleteUsers = async (ids) => {
 export const addImage = async (imageInfo, company) => {
 
   let reply;
-  
+
   await fetch(`${BACKEND_URL}/image`, {
     method: 'POST',
     body: JSON.stringify({ file: imageInfo, company: company }),
