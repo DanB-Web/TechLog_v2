@@ -158,7 +158,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   e.preventDefault();
   const reply = await deleteReport(id, images);
   console.log(reply);
-  //setReportDeleted(true);
+  setReportDeleted(true);
  }
 
   if (submitted) {
