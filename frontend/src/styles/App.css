@@ -113,6 +113,19 @@ a:active {
   color: inherit;
 }
 
+label {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+hr {
+  margin-bottom: 0.5rem;
+}
+
+.report-helper {
+  color: var(--color-font-helper);
+}
+
 button:hover {
   cursor: pointer;
 }
@@ -138,12 +151,37 @@ textarea:focus {
   border: 3px solid var(--color-tag);
 }
 
+input,
+textarea {
+  font-size: large;
+  padding: 0.5rem;
+}
+
 textarea {
   resize: none;
 }
 
 html:focus-within {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h4,
+label,
+p,
+li {
+  color: var(--color-font);
+}
+
+input,
+textarea {
+  color: var(--color-font);
+  background-color: var(--color-form-boder);
 }
 
 .backdrop-container {
@@ -163,6 +201,16 @@ html:focus-within {
 }
 
 .beat-loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
   margin-top: 5rem;
 }
 /*# sourceMappingURL=App.css.map */

@@ -168,7 +168,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   }
 
   if (submitSuccess) {
-    return  <div>
+    return  <div className="edit-success-container">
               <Alert
               message={'Form edit submitted!'}
               variant={'success'}
@@ -187,12 +187,12 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   }
 
   if (reportDeleted) {
-    return <>
-      <p>Report deleted</p>
+    return <div className="delete-success-container">
+      <p>Report deleted!</p>
       <Link to="/search">
         <button>Back to search</button>
       </Link>
-    </>
+    </div>
   }
 
   if (showConfirmDelete) {

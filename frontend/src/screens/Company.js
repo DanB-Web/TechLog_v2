@@ -117,9 +117,7 @@ const Company = ({ history }) => {
       setDeleteUsers(filter);
     }
   }
-
-  console.log(pageState);
-
+  
   return (
     <div className="company-container">
 
