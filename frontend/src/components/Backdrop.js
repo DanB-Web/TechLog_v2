@@ -1,8 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 
-import '../styles/App.scss';
-
 import Drawer from './Drawer';
 import ReportDetail from './ReportDetail';
 

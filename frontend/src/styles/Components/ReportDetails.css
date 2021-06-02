@@ -22,6 +22,7 @@
 
 .report-details h4 {
   margin-top: 0.5rem;
+  font-size: 1.3rem;
 }
 
 .report-details .report-approved,
@@ -37,12 +38,13 @@
           align-items: center;
   min-height: 4rem;
   border-radius: 5px;
-  color: #fff;
 }
 
 .report-details .report-approved p,
 .report-details .report-unapproved p {
   margin-left: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .report-details .report-approved {
@@ -90,6 +92,31 @@
   color: var(--color-tag);
 }
 
+.report-details .report-details-steps li {
+  margin-bottom: 0.5rem;
+}
+
+.report-details .report-details-image-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.report-details .report-details-image-container .report-detail-image-thumbs {
+  width: 200px;
+  height: 200px;
+}
+
+.report-details .report-details-image-container .report-detail-image-thumbs:hover {
+  opacity: 0.7;
+}
+
 .report-details .report-details-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -119,7 +146,7 @@
 }
 
 .report-details .submit-comment textarea {
-  width: 70%;
+  width: 100%;
   height: 70px;
   padding: 0.3rem;
   font-size: 1.1rem;
@@ -131,6 +158,7 @@
 
 .report-details .submit-comment button {
   width: 140px;
+  margin-left: 2rem;
 }
 
 .report-details .comment-success {
@@ -181,5 +209,32 @@
   /* roundness of the scroll thumb */
   border: 3px solid var(--color-border);
   /* creates padding around scroll thumb */
+}
+
+.detailed-image-container {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.detailed-image-container img {
+  width: 80%;
+  height: 80%;
+}
+
+.detailed-image-container .detailed-image-text {
+  color: #fff;
+  font-weight: 900;
 }
 /*# sourceMappingURL=ReportDetails.css.map */

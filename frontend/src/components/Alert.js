@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../styles/Components/Alert.scss'
-
 const Alert = ({message, variant}) => {
 
   let background, icon;

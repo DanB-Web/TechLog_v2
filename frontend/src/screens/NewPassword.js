@@ -9,8 +9,6 @@ import { BeatLoader } from 'react-spinners';
 
 import Alert from '../components/Alert.js';
 
-import '../styles/Screens/NewPassword.scss';
-
 const NewPassword = () => {
 
   const [userEmail, setUserEmail] = useState('');

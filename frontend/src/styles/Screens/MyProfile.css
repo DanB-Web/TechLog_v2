@@ -1,4 +1,6 @@
 .myprofile-container {
+  width: 80%;
+  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,15 +8,18 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin-top: 2rem;
 }
 
 .myprofile-container form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.myprofile-container form .myprofile-form-input-container {
+  width: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -22,11 +27,34 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+}
+
+.myprofile-container form .myprofile-form-input-container .myprofile-form-input {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.myprofile-container form .myprofile-form-input-container .myprofile-form-input .myprofile-label {
+  width: 30%;
+}
+
+.myprofile-container form .myprofile-form-input-container .myprofile-form-input input {
+  width: 80%;
+  height: 1.8rem;
+}
+
+.myprofile-container form button {
+  margin-top: 2.3rem;
+  height: 3rem;
+  font-size: 1rem;
+  text-align: center;
 }
 /*# sourceMappingURL=MyProfile.css.map */

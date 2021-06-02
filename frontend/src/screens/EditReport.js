@@ -13,8 +13,6 @@ import Images from '../components/Images';
 import ReportComment from '../components/ReportComment';
 import Alert from '../components/Alert';
 
-import '../styles/Screens/EditReport.scss';
-
 const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
   //CHECK FOR AUTH USER
@@ -35,7 +33,7 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
   const [editImages, setEditImages] = useState(images);
   const [editComments, setEditComments] = useState(comments);
 
-  //FORM LOGIC
+  //FORM LOCAL STATE
   const [newTag, setNewTag] = useState('');
   const [newStep, setNewStep] = useState('');
 
@@ -150,49 +148,38 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
   //DELETE REPORT HANDLER
  const setShowConfirmDeleteHandler = (e) => {
-  e.preventDefault();
-  setShowConfirmDelete(!showConfirmDelete);
+    e.preventDefault();
+    setShowConfirmDelete(!showConfirmDelete);
  }
 
  const reportDeleteHandler = async (e) => {
-  e.preventDefault();
-  const reply = await deleteReport(id, images);
-  console.log(reply);
-  setReportDeleted(true);
+    e.preventDefault();
+    await deleteReport(id, images);
+    setReportDeleted(true);
  }
 
   if (submitted) {
     return  <div className="beat-loader">
-            <BeatLoader size={40} color={'#C0C0C0'}/>
+              <BeatLoader size={40} color={'#C0C0C0'}/>
             </div>
   }
 
   if (submitSuccess) {
-    return  <div>
-              <Alert
-              message={'Form edit submitted!'}
-              variant={'success'}
-              ></Alert> 
-              <Link to="/search">
-                <button>Back to search</button>
-              </Link>
+    return  <div className="edit-success-container">
+              <Alert message={'Form edit submitted!'} variant={'success'}></Alert> 
+              <Link to="/search"><button>Back to search</button></Link>
             </div>
   }
 
   if (submitError) {
-    return  <Alert
-            message={'Form submission error!'}
-            variant={'danger'}
-            ></Alert> 
+    return  <Alert message={'Form submission error!'} variant={'danger'}></Alert> 
   }
 
   if (reportDeleted) {
-    return <>
-      <p>Report deleted</p>
-      <Link to="/search">
-        <button>Back to search</button>
-      </Link>
-    </>
+    return  <div className="delete-success-container">
+              <p className="report-helper">Report deleted!</p>
+              <Link to="/search"><button>Back to search</button></Link>
+            </div>
   }
 
   if (showConfirmDelete) {
@@ -225,19 +212,21 @@ const EditReport = ({ history, reportDetails, setReportDetails }) => {
 
         <label>Author</label>
         <hr/>
-        <p>{user && user.name}</p>
+        <p>{user ? user.name : null}</p>
 
         <label>Contact</label>
         <hr/>
-        <p>{user && user.email}</p>
+        <p>{user ? user.email : null}</p>
 
         <label>SearchTags</label>
         <hr/>
         <ul className="edit-report-searchtags">
-          {editTags && editTags.map((tag, index) => {
-            return <li key={index}># {tag} <button onClick={removeTagHandler}>X</button></li>
-          })}
+          {editTags ? 
+            editTags.map((tag, index) => {
+              return <li key={index}># {tag} <button onClick={removeTagHandler}>X</button></li>
+            }) : null}
         </ul>
+
         <input 
           type="text" 
           placeholder="Please enter a custom tag.."

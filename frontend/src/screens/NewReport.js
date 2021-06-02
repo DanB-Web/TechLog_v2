@@ -10,8 +10,6 @@ import Alert from '../components/Alert';
 
 import { BeatLoader } from 'react-spinners';
 
-import '../styles/Screens/NewReport.scss';
-
 const NewReport = ({ history }) => {
 
   const auth = useSelector((state) => state.userLogin.loggedIn);
@@ -141,8 +139,7 @@ const NewReport = ({ history }) => {
           onChange={(e) => setReportTitle(e.target.value)}></input>
 
         <label>Search Tags</label>
-        <p className="report-helper">Any search terms that will help to find the report</p>
-        <p className="report-helper">Double click a tag to delete it</p>
+        <p className="report-helper">Any search terms that will help to find the report - double click to delete</p>
         <hr/>
         <Checkbox 
           reportTags={reportTags}
@@ -189,8 +186,7 @@ const NewReport = ({ history }) => {
         ></textarea>   
 
         <label>Steps</label>
-        <p className="report-helper">A step by step guide to resolving the issue</p>
-        <p className="report-helper">Double click a step to delete it</p>
+        <p className="report-helper">A step by step guide to resolving the issue - double click to delete</p>
         <hr/>
         <ul className="new-report-steps-ul">
           {reportSteps.length > 0 ? 

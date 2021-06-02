@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../styles/Components/ReportTile.scss'
-
 const ReportTile = ({report, searchTerms, setViewReport, setReportDetails}) => {
 
   const checkTags = () => {

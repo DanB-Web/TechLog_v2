@@ -9,8 +9,6 @@ import Alert from './Alert';
 
 import {addComment} from '../utils/rest';
 
-import '../styles/Components/ReportDetails.scss';
-
 const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
 
   const [newComment, setNewComment] = useState('');
@@ -81,10 +79,10 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
 
       {approved ? 
         <div className="report-approved">
-          <p>Reviewed by {approvedBy.name}</p>
+          <p>Approved by {approvedBy.name}</p>
         </div> :
         <div className="report-unapproved">
-          <p>Awaiting review...</p>
+          <p>Awaiting approval...</p>
         </div>  
       }
 
@@ -97,6 +95,7 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
       </div>
   
       <h4>Search Tags</h4>
+      <hr/>
       <ul className="report-tags">
         {tags.map((tag, index) => {
           return <li key={index}>#{tag}</li>
@@ -104,14 +103,17 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
       </ul>
 
       <h4>Overview</h4>
+      <hr/>
       <p>{shortDesc}</p>
 
-      <h4>Detailed</h4>
+      <h4>Detailed Description</h4>
+      <hr/>
       <p>{longDesc}</p>
 
       {steps && <>
         <h4>Steps</h4>
-            <ul>
+        <hr/>
+            <ul className="report-details-steps">
               {steps.map((step, index) => {
                 return <li key={index}>{index + 1}: {step}</li>
               })}
@@ -120,6 +122,7 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
     
       {images.length > 0 && <>
         <h4>Images</h4>
+        <hr/>
         <ul className="report-details-image-container">
           {images.map(image  => {
               return <img 
@@ -142,6 +145,7 @@ const ReportDetail = ({setViewReport, reportDetails, setReportDetails }) => {
       </div>
       
       <h4>Comments</h4>
+      <hr/>
       {comments.length > 0 ? <>
         <ul>
           {comments.map((comment, index) => {

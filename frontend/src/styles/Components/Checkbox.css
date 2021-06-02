@@ -1,0 +1,30 @@
+.checkbox-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.checkbox-container .searchtag-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin: 0 0.3rem;
+}
+
+.checkbox-container .searchtag-container label {
+  font-size: 1.3rem !important;
+  margin: 0rem 0.5rem 0.5rem !important;
+  color: var(--color-tag);
+}
+/*# sourceMappingURL=Checkbox.css.map */

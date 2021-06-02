@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-import '../styles/Components/Navbar.scss'
-
 const NavBar = ({mode, toggleMode, toggleDrawer, logout}) => {
 
   const user = useSelector((state) => state.userLogin);

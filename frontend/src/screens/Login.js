@@ -9,8 +9,6 @@ import Alert from '../components/Alert';
 
 import { BeatLoader } from 'react-spinners';
 
-import '../styles/Screens/Login.scss';
-
 const Login = ({history}) => {
 
   //APP STATE

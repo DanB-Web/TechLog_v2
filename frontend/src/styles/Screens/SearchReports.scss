@@ -1,4 +1,3 @@
-@import "../_config";
 
 .searchReports-container {
   margin: auto;
@@ -7,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding-bottom: 4rem;
   .search-reports-unapproved-switch {
     position: absolute;
     top: 1rem;
