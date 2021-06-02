@@ -1,0 +1,95 @@
+.company-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.company-container .add-company-user-container {
+  margin-top: 2rem;
+  width: 80%;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container {
+  width: 100%;
+  border: 1px solid blue;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  border: 1px solid red;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-username,
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-user-email {
+  width: 140%;
+  border: 1px solid green;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-username input,
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-user-email input {
+  height: 2rem;
+  width: 60%;
+  margin-bottom: 0.8rem;
+  margin-left: 3rem;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-user-admin-switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 0;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form .add-company-user-admin-switch .admin-switch {
+  margin-left: 15rem;
+}
+
+.company-container .add-company-user-container .add-company-user-form-container form button {
+  width: 6rem;
+  height: 2.4rem;
+  margin-right: 5rem;
+}
+
+.company-container .company-add-user-alerts {
+  width: 80%;
+  margin-top: 1rem;
+}
+
+.company-container .company-users {
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.company-container .company-users .company-user-tile-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.company-container .delete-user-button {
+  margin-top: 1rem;
+}
+/*# sourceMappingURL=Company.css.map */

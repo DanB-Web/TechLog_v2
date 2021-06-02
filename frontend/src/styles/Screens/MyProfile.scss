@@ -7,7 +7,6 @@
   form {
     width: 100%;
     display: flex;
-    align-items: center;
     .myprofile-form-input-container {
       width: 70%;
       display: flex;
@@ -21,13 +20,16 @@
           width: 30%;
         }
         input {
-          width: 60%;
+          width: 80%;
           height: 1.8rem;
         }
       }
     }
     button {
-      height: 2rem;
+      margin-top: 2.3rem;
+      height: 3rem;
+      font-size: 1rem;
+      text-align: center;
     }
   }
 }

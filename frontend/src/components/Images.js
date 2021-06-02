@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 
 import { addImage, removeImage } from '../utils/rest';
 
-import '../styles/Components/Images.scss';
-
 const Images = ({ reportImages, setReportImages }) => {
 
   const [fileInputState, setFileInputState] = useState('');
@@ -63,8 +61,7 @@ const Images = ({ reportImages, setReportImages }) => {
   return (
     <div className="images-container">
       <label>Images</label>
-      <p className="report-helper">Any supporting images.</p>
-      <p className="report-helper">Double click an image to delete it.</p>
+      <p className="report-helper">Any supporting images - double click to delete</p>
       <hr/>
       <div>
         {reportImages.length === 0 ? 

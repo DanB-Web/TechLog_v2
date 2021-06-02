@@ -1,0 +1,29 @@
+body {
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h4,
+label,
+p,
+li {
+  color: var(--color-font);
+}
+
+label {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+hr {
+  margin-bottom: 0.5rem;
+}
+
+.report-helper {
+  color: var(--color-font-helper);
+}
+
+button:hover {
+  cursor: pointer;
+}

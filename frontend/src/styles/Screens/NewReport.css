@@ -20,15 +20,57 @@
   width: 60%;
 }
 
-.checkbox-container {
+.new-report-container .new-report-form input {
+  margin-bottom: 0.8rem;
+}
+
+.new-report-container .new-report-form .new-report-tags-ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  min-height: 2rem;
+}
+
+.new-report-container .new-report-form .new-report-tags-ul li {
+  color: var(--color-tag);
+}
+
+.new-report-container .new-report-form .new-report-tags-ul p {
+  color: var(--color-form-border);
+  font-size: larger;
+  font-weight: bold;
+}
+
+.new-report-container .new-report-form .report-shortDesc {
+  min-height: 8rem;
+}
+
+.new-report-container .new-report-form .report-longDesc {
+  min-height: 20rem;
+}
+
+.new-report-container .new-report-form .new-report-steps-ul li {
+  font-size: large;
+  border: 2px solid transparent;
+}
+
+.new-report-container .new-report-form .new-report-steps-ul li:hover {
+  color: var(--color-danger);
+  border: 2px solid var(--color-danger);
+  border-radius: 5px;
+}
+
+.new-report-container .new-report-form .new-report-steps-ul p {
+  color: var(--color-form-border);
+  font-size: larger;
+  font-weight: bold;
 }
 /*# sourceMappingURL=NewReport.css.map */

@@ -8,8 +8,6 @@ import { BeatLoader } from 'react-spinners';
 
 import Alert from '../components/Alert';
 
-import '../styles/Screens/MyProfile.scss';
-
 const Profile = ({ history }) => {
 
   const auth = useSelector((state) => state.userLogin.loggedIn);

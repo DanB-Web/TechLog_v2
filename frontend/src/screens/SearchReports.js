@@ -10,8 +10,6 @@ import Alert from '../components/Alert';
 import SearchBar from '../components/SearchBar';
 import ReportTile from '../components/ReportTile';
 
-import '../styles/Screens/SearchReports.scss';
-
 const SearchReports = ({ history, setViewReport, setReportDetails }) => {
 
   //REDIRECT FOR UNAUTH USERS
@@ -32,13 +30,10 @@ const SearchReports = ({ history, setViewReport, setReportDetails }) => {
 
   //ADD AND REMOVE SEARCH TERMS
   const addSearchTerm = (term) => {
-
     if (term.charAt(0) === '#') {
       term = term.slice(1);
     }
-
     if (searchTerms.includes(term)) return;
-
     setSearchTerms([...searchTerms, term.toLowerCase()]);
   }
 
@@ -92,8 +87,6 @@ const SearchReports = ({ history, setViewReport, setReportDetails }) => {
             removeSearchTerm={removeSearchTerm}  
           />
 
-          
-          
           <div className="searchReports-tiles-container">
             {showUnapproved ? 
             unapprovedReports.map((report, index) => (
