@@ -11,8 +11,6 @@ import { addUser as addUserRest, deleteUsers as deleteUsersRest } from '../utils
 import UserTile from '../components/UserTile.js';
 import Alert from '../components/Alert.js';
 
-import '../styles/Screens/Company.scss';
-
 const Company = ({ history }) => {
 
   const auth = useSelector((state) => state.userLogin.loggedIn);
@@ -122,41 +120,41 @@ const Company = ({ history }) => {
     <div className="company-container">
 
       <div className="add-company-user-container"> 
-      {pageState.submitLoading ? 
-        <div className="beat-loader"> 
-            <BeatLoader size={40} color={'#C0C0C0'}/>
-        </div> :
-        <div className="add-company-user-form-container">
-        
-          <label>Add New User</label>
-          <hr/>
-          <form className="add-company-user-form" onSubmit={(e) => newUserHandler(e)}>
-          <div>
-            <div>
-              <label>New User Name:</label>
-              <input type="text" 
-                    placeholder="Enter new user name..."
-                    value={pageState.username} 
-                    onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
-                    required></input>
-            </div>
-            <div>
-              <label>New User Email: </label>
-              <input type="email" 
-                    placeholder="Enter new user email..."
-                    value={pageState.userEmail} 
-                    onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
-                    required></input>
-            </div>
 
-          <label className="add-company-user-admin-switch">
-            <span>Admin:</span>
-            <Switch className="admin-switch" onChange={adminToggleHandler} checked={pageState.userAdmin} />
-          </label>
-        </div>
-            <button type="submit">Add User</button>
-          </form>
-        </div>
+        {pageState.submitLoading ? 
+          <div className="beat-loader"> 
+              <BeatLoader size={40} color={'#C0C0C0'}/>
+          </div> :
+          <div className="add-company-user-form-container">
+            <label>Add New User</label>
+            <hr/>
+            <form className="add-company-user-form" onSubmit={(e) => newUserHandler(e)}>
+            <div>
+              <div className="add-company-username">
+                <label>New User Name:</label>
+                <input type="text" 
+                      placeholder="Enter new user name..."
+                      value={pageState.username} 
+                      onChange={(e) => dispatchReducer({type: 'USER_NAME', value: e.target.value})} 
+                      required></input>
+              </div>
+              <div className="add-company-user-email">
+                <label>New User Email: </label>
+                <input type="email" 
+                      placeholder="Enter new user email..."
+                      value={pageState.userEmail} 
+                      onChange={(e) => dispatchReducer({type: 'USER_EMAIL', value: e.target.value})} 
+                      required></input>
+              </div>
+
+            <label className="add-company-user-admin-switch">
+              <span>Admin:</span>
+              <Switch className="admin-switch" onChange={adminToggleHandler} checked={pageState.userAdmin} />
+            </label>
+          </div>
+              <button type="submit">Add User</button>
+            </form>
+          </div>
         }
       </div>
 
@@ -174,8 +172,6 @@ const Company = ({ history }) => {
           null 
           }
       </div>
-
-    
 
       <div className="company-users">
         {loading ? 

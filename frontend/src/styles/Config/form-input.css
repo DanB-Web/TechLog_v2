@@ -1,0 +1,36 @@
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  outline: none;
+  border: 3px solid var(--color-form-border);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  -webkit-box-shadow: 0 0 5px var(--color-tag);
+          box-shadow: 0 0 5px var(--color-tag);
+  border: 3px solid var(--color-tag);
+}
+
+input,
+textarea {
+  font-size: large;
+  padding: 0.5rem;
+}
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea {
+  color: var(--color-font);
+}
+/*# sourceMappingURL=form-input.css.map */

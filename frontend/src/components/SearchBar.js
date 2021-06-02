@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import SearchTag from './SearchTag';
 
-import '../styles/Components/SearchBar.scss';
-
 const SearchBar = ({ searchTerms, addSearchTerm, removeSearchTerm }) => {
 
   const [searchTerm, setSearchTerm] = useState('');

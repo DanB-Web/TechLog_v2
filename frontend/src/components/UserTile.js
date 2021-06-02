@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../styles/Components/UserTile.scss';
-
 const UserTile = ({user, checkboxHandler}) => {
 
   const { id, name, email, isAdmin } = user;

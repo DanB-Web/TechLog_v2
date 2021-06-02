@@ -12,6 +12,7 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  padding-bottom: 4rem;
 }
 
 .searchReports-container .search-reports-unapproved-switch {
@@ -29,7 +30,7 @@
 
 .searchReports-container .search-reports-unapproved-switch p {
   margin-left: 0.6rem;
-  color: var(--color-tag);
+  color: var(--color-primary);
   font-weight: 700;
 }
 
